@@ -13,14 +13,15 @@
 
 body {
   --background-color: #fff;
-  --text-color: #000;
+  --text-color: #252525;
   background-color: var(--background-color);
   color: var(--text-color);
 }
 
+/* Dark theme colors */
+
 body[data-theme='dark'] {
-  /* Dark theme colors */
-  --background-color: #000;
+  --background-color: #252525;
   --text-color: #fff;
 }
 
