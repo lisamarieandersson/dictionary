@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import ThemeToggle from './ThemeToggle';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -14,20 +15,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* <button onClick={toggleTheme}>Toggle Theme</button> */}
-      <div className="toggle-switch">
-        <input
-          id="theme-switch"
-          type="checkbox"
-          className="toggle-switch-checkbox"
-          onChange={toggleTheme}
-          checked={theme === 'dark'}
-        />
-        <label className="toggle-switch-label" htmlFor="theme-switch">
-          <span className="toggle-switch-inner" />
-          <span className="toggle-switch-switch" />
-        </label>
-      </div>
+      <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
       <h1>Hello World</h1>
     </div>
   );
