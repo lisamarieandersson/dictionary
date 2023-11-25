@@ -4,7 +4,7 @@
   display: inline-block;
   width: 60px;
   height: 34px;
-  border: 2px solid #000; /* Border for light theme */
+  border: 2px solid #252522; /* Border for light theme */
   border-radius: 34px;
   background-color: transparent; /* Transparent background to show the border */
 }
@@ -36,7 +36,7 @@
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: #000; /* Light mode knob color */
+  background-color: #252525; /* Light mode knob color */
   transition: 0.4s;
   border-radius: 50%;
 }
@@ -65,9 +65,9 @@ body[data-theme='dark'] .toggle-switch-label:before {
 
 /* For the light theme styling */
 body[data-theme='light'] .toggle-switch {
-  border-color: #000; /* Keep border color for light theme */
+  border-color: #252525; /* Keep border color for light theme */
 }
 
 body[data-theme='light'] .toggle-switch-label:before {
-  background-color: #000; /* This sets the knob color in light mode */
+  background-color: #252525; /* This sets the knob color in light mode */
 }
