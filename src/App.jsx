@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-      <h1>Hello World</h1>
+      <h1>Dictionary</h1>
     </div>
   );
 }
