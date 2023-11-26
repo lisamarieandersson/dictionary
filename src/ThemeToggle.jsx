@@ -9,6 +9,9 @@ function ThemeToggle({ theme, toggleTheme }) {
         className="toggle-switch-checkbox"
         onChange={toggleTheme}
         checked={theme === 'dark'}
+        aria-label={
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
+        }
       />
       <label className="toggle-switch-label" htmlFor="theme-switch">
         <span className="toggle-switch-inner" />
