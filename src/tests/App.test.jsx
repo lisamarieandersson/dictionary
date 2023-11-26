@@ -10,10 +10,10 @@ test('should have "Hello World"', () => {
   expect(message).toBeVisible();
 });
 
-test('should have header with text "Dictionary"', () => {
+test('should have header with headline "Dictionary"', () => {
   render(<Header />);
-  const text = screen.getByText('Dictionary');
-  expect(text).toBeInTheDocument();
+  const headline = screen.getByText('Dictionary');
+  expect(headline).toBeInTheDocument();
 });
 
 describe('ThemeToggle', () => {
