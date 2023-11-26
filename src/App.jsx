@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import ThemeToggle from './ThemeToggle';
+import Header from './Header';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -15,8 +15,8 @@ function App() {
 
   return (
     <div className="App">
-      <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-      <h1>Dictionary</h1>
+      <Header theme={theme} toggleTheme={toggleTheme} />
+      <h1>Hello World</h1>
     </div>
   );
 }
