@@ -23,6 +23,9 @@ describe('ThemeToggle', () => {
       <ThemeToggle theme="light" toggleTheme={toggleTheme} />
     );
 
+    // Check that the initial text is correct for light mode
+    expect(screen.getByText('Light Mode')).toBeInTheDocument();
+
     // Use getByRole to find the checkbox
     const checkbox = getByRole('checkbox');
 
