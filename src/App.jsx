@@ -34,7 +34,7 @@ function App() {
   };
 
   return (
-    <div className="App" data-theme={theme}>
+    <div className="App" data-testid="app-root" data-theme={theme}>
       <Header theme={theme} toggleTheme={toggleTheme} />
       <SearchForm onSearch={handleSearch} />
       {wordData && (
