@@ -1,9 +1,6 @@
 // ThemeToggle.js
 
 function ThemeToggle({ theme, toggleTheme }) {
-  // Use defaultChecked for testing purposes
-  //   const isDarkMode = theme === 'dark';
-
   return (
     <div className="theme-toggle-container">
       <div className="toggle-switch">
@@ -13,7 +10,6 @@ function ThemeToggle({ theme, toggleTheme }) {
           className="toggle-switch-checkbox"
           onChange={toggleTheme}
           checked={theme === 'dark'}
-          //   defaultChecked={isDarkMode}
           aria-label={
             theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
           }
