@@ -1,0 +1,30 @@
+[
+  {
+    "word": "coffee",
+    "phonetic": "/ˈkɑ.fi/",
+    "phonetics": [
+      {
+        "text": "/ˈkɑ.fi/",
+        "audio": ""
+      },
+      {
+        "text": "/ˈkɒ.fi/",
+        "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/coffee-uk.mp3"
+      }
+    ],
+    "meanings": [
+      {
+        "partOfSpeech": "noun",
+        "definitions": [
+          {
+            "definition": "A beverage made by infusing the beans of the coffee plant in hot water."
+          },
+          {
+            "definition": "The seeds of the plant used to make coffee, misnamed ‘beans’ due to their shape."
+          }
+        ]
+      }
+    ],
+    "sourceUrls": ["https://en.wiktionary.org/wiki/coffee"]
+  }
+]
