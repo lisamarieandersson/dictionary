@@ -1,8 +1,12 @@
+/* ----- Header styling ----- */
+
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
+/* ----- Toggle light and dark mode ----- */
 
 .theme-toggle-container {
   display: flex;
@@ -21,9 +25,9 @@ header {
   display: inline-block;
   width: 60px;
   height: 34px;
-  border: 2px solid #252522; /* Border for light theme */
+  border: 2px solid var(--color-dark);
   border-radius: 34px;
-  background-color: transparent; /* Transparent background to show the border */
+  background-color: transparent;
 }
 
 /* Hide default HTML checkbox */
@@ -41,7 +45,7 @@ header {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: transparent; /* Transparent background to allow border to be visible */
+  background-color: transparent;
   transition: 0.4s;
   border-radius: 34px;
 }
@@ -53,14 +57,14 @@ header {
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: #252525; /* Light mode knob color */
+  background-color: var(--color-dark); /* Light mode knob color */
   transition: 0.4s;
   border-radius: 50%;
 }
 
 .toggle-switch-checkbox:checked + .toggle-switch-label:before {
   transform: translateX(26px);
-  background-color: #fff; /* Dark mode knob color */
+  background-color: var(--color-light); /* Dark mode knob color */
 }
 
 .toggle-switch-checkbox:focus + .toggle-switch-label {
@@ -69,22 +73,83 @@ header {
 
 /* For the dark theme styling */
 body[data-theme='dark'] .toggle-switch {
-  border-color: #fff; /* Border for dark theme */
+  border-color: var(--color-light);
 }
 
 body[data-theme='dark'] .toggle-switch-label {
-  background-color: transparent; /* Keep background transparent */
+  background-color: transparent;
 }
 
 body[data-theme='dark'] .toggle-switch-label:before {
-  background-color: #fff; /* This sets the knob color in dark mode */
+  background-color: var(
+    --color-light
+  ); /* This sets the knob color in dark mode */
 }
 
 /* For the light theme styling */
 body[data-theme='light'] .toggle-switch {
-  border-color: #252525; /* Keep border color for light theme */
+  border-color: var(--color-dark); /* Keep border color for light theme */
 }
 
 body[data-theme='light'] .toggle-switch-label:before {
-  background-color: #252525; /* This sets the knob color in light mode */
+  background-color: var(
+    --color-dark
+  ); /* This sets the knob color in light mode */
+}
+
+/* ----- Button styling for light and dark mode ----- */
+
+body[data-theme='light'] button {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  outline: solid 0.1rem var(--color-dark);
+}
+
+body[data-theme='light'] button:hover {
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  outline: solid 0.1rem var(--color-dark);
+}
+
+body[data-theme='dark'] button {
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  outline: solid 0.1rem var(--color-light);
+}
+
+body[data-theme='dark'] button:hover {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  outline: solid 0.1rem var(--color-light);
+}
+
+/* ----- Form with search input and button ----- */
+
+form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+input {
+  border-radius: 99em;
+  padding: 1rem;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.5;
+  font-size: 1rem;
+  border: solid 0.1rem var(--color-dark);
+  width: 26rem;
+  pointer-events: all;
+}
+
+button {
+  border-radius: 99em;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.5;
+  font-size: 1rem;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
 }
