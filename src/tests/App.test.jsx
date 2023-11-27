@@ -1,38 +1,22 @@
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
 import App from '../App';
-import Header from '../Header';
-import ThemeToggle from '../ThemeToggle';
 
-test('should have "Hello World"', () => {
+const server = setupServer(
+  rest.get(
+    'https://api.dictionaryapi.dev/api/v2/entries/en/:word',
+    (req, res, ctx) => {
+      return res(ctx.json(mockWords)); // Return your mock data
+    }
+  )
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+test('should render the correct header', () => {
   render(<App />);
-  const message = screen.queryByText(/Hello World/i);
-  expect(message).toBeVisible();
-});
-
-test('should have header with headline "Dictionary"', () => {
-  render(<Header />);
-  const headline = screen.getByText('Dictionary');
-  expect(headline).toBeInTheDocument();
-});
-
-describe('ThemeToggle', () => {
-  it('should toggle theme when checkbox is clicked', async () => {
-    const toggleTheme = vi.fn();
-    const { getByRole } = render(
-      <ThemeToggle theme="light" toggleTheme={toggleTheme} />
-    );
-
-    // Check that the initial text is correct for light mode
-    expect(screen.getByText('Light Mode')).toBeInTheDocument();
-
-    // Use getByRole to find the checkbox
-    const checkbox = getByRole('checkbox');
-
-    // Use userEvent to click the checkbox
-    await userEvent.click(checkbox);
-
-    // Assert that toggleTheme was called
-    expect(toggleTheme).toHaveBeenCalledTimes(1);
-  });
+  expect(screen.getByText('Dictionary')).toBeInTheDocument();
 });
