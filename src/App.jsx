@@ -34,24 +34,30 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App" data-theme={theme}>
       <Header theme={theme} toggleTheme={toggleTheme} />
       <SearchForm onSearch={handleSearch} />
       {wordData && (
         <div>
           <h2>{wordData.word}</h2>
-          {wordData.phonetics.map((phonetic, index) => (
-            <div key={index}>
-              {phonetic.text && <p>Phonetic: {phonetic.text}</p>}
-              {phonetic.audio && <audio controls src={phonetic.audio}></audio>}
-            </div>
-          ))}
+          <ul>
+            {wordData.phonetics.map((phonetic, index) => (
+              <li key={index}>
+                {phonetic.text && <p>Phonetic: {phonetic.text}</p>}
+                {phonetic.audio && (
+                  <audio controls src={phonetic.audio}></audio>
+                )}
+              </li>
+            ))}
+          </ul>
           {wordData.meanings.map((meaning, index) => (
             <div key={index}>
               <h3>{meaning.partOfSpeech}</h3>
-              {meaning.definitions.map((definition, index) => (
-                <p key={index}>{definition.definition}</p>
-              ))}
+              <ul>
+                {meaning.definitions.map((definition, idx) => (
+                  <li key={idx}>{definition.definition}</li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
