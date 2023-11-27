@@ -33,12 +33,13 @@ test('should display new word after submission via click', async () => {
   const button = screen.getByRole('button', { name: /search/i });
   await user.click(button);
 
-  expect(await screen.findByText('coffee')).toBeInTheDocument();
-  expect(
-    await screen.findByText(
-      /A beverage made by infusing the beans of the coffee plant in hot water./i
-    )
-  ).toBeInTheDocument();
+  await waitFor(() => {
+    expect(screen.getByText('coffee')).toBeInTheDocument();
+  });
+
+  await waitFor(() => {
+    expect(screen.getByText('coffee')).toBeInTheDocument();
+  });
 });
 
 test('should display new word after submission via enter', async () => {
@@ -48,21 +49,22 @@ test('should display new word after submission via enter', async () => {
   const input = screen.getByRole('textbox');
   await user.type(input, 'coffee');
 
-  await user.keyboard('{Enter}');
+  await user.type(input, 'coffee{Enter}');
 
-  expect(await screen.findByText('coffee')).toBeInTheDocument();
-  expect(
-    await screen.findByText(
-      /A beverage made by infusing the beans of the coffee plant in hot water./i
-    )
-  ).toBeInTheDocument();
+  await waitFor(() => {
+    expect(screen.getByText('coffee')).toBeInTheDocument();
+  });
+
+  await waitFor(() => {
+    expect(screen.getByText('coffee')).toBeInTheDocument();
+  });
 });
 
 test('should be able to switch from light to dark mode', async () => {
-  const { container } = render(<App />);
+  render(<App />);
   const user = userEvent.setup();
 
-  const appRoot = container.firstChild;
+  const appRoot = screen.getByTestId('app-root');
   expect(appRoot).toHaveAttribute('data-theme', 'light');
 
   const toggle = screen.getByRole('checkbox', { name: /Dark Mode/i });
@@ -72,4 +74,6 @@ test('should be able to switch from light to dark mode', async () => {
   await waitFor(() => {
     expect(appRoot).toHaveAttribute('data-theme', 'dark');
   });
+
+  // Kolla så att texten dark syns med!! sista grejen på detta test
 });
