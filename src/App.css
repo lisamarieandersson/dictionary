@@ -1,3 +1,49 @@
+/* ----- Default light theme styles ----- */
+
+.App {
+  background-color: var(--color-background-light);
+  color: var(--text-color-dark);
+  height: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+  margin: 0;
+}
+
+/* ----- Dark Theme Styles ----- */
+
+.App[data-theme='dark'] {
+  background-color: var(--color-background-dark);
+  color: var(--text-color-light);
+}
+
+/* ----- Button styling for light and dark mode ----- */
+
+.App[data-theme='light'] button {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  outline: solid 0.1rem var(--color-dark);
+}
+
+.App[data-theme='light'] button:hover {
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  outline: solid 0.1rem var(--color-dark);
+}
+
+.App[data-theme='dark'] button {
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  outline: solid 0.1rem var(--color-light);
+}
+
+.App[data-theme='dark'] button:hover {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  outline: solid 0.1rem var(--color-light);
+}
+
 /* ----- Header styling ----- */
 
 header {
@@ -6,7 +52,7 @@ header {
   align-items: center;
 }
 
-/* ----- Toggle light and dark mode ----- */
+/* ----- Styling for compoment that toggles light and dark mode ----- */
 
 .theme-toggle-container {
   display: flex;
@@ -72,55 +118,29 @@ header {
 }
 
 /* For the dark theme styling */
-body[data-theme='dark'] .toggle-switch {
+.App[data-theme='dark'] .toggle-switch {
   border-color: var(--color-light);
 }
 
-body[data-theme='dark'] .toggle-switch-label {
+.App[data-theme='dark'] .toggle-switch-label {
   background-color: transparent;
 }
 
-body[data-theme='dark'] .toggle-switch-label:before {
+.App[data-theme='dark'] .toggle-switch-label:before {
   background-color: var(
     --color-light
   ); /* This sets the knob color in dark mode */
 }
 
 /* For the light theme styling */
-body[data-theme='light'] .toggle-switch {
+.App[data-theme='light'] .toggle-switch {
   border-color: var(--color-dark); /* Keep border color for light theme */
 }
 
-body[data-theme='light'] .toggle-switch-label:before {
+.App[data-theme='light'] .toggle-switch-label:before {
   background-color: var(
     --color-dark
   ); /* This sets the knob color in light mode */
-}
-
-/* ----- Button styling for light and dark mode ----- */
-
-body[data-theme='light'] button {
-  background-color: var(--color-dark);
-  color: var(--color-light);
-  outline: solid 0.1rem var(--color-dark);
-}
-
-body[data-theme='light'] button:hover {
-  background-color: var(--color-light);
-  color: var(--color-dark);
-  outline: solid 0.1rem var(--color-dark);
-}
-
-body[data-theme='dark'] button {
-  background-color: var(--color-light);
-  color: var(--color-dark);
-  outline: solid 0.1rem var(--color-light);
-}
-
-body[data-theme='dark'] button:hover {
-  background-color: var(--color-dark);
-  color: var(--color-light);
-  outline: solid 0.1rem var(--color-light);
 }
 
 /* ----- Form with search input and button ----- */

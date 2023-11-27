@@ -7,24 +7,20 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --color-dark: #252525;
+  --color-background-light: #fff;
+  --color-background-dark: #252525;
   --color-light: #fff;
+  --color-dark: #252525;
+  --text-color-light: #fff;
+  --text-color-dark: #252525;
 }
 
-/* ----- Default light theme styles ----- */
-
+html,
 body {
-  --background-color: #fff;
-  --text-color: #252525;
-  background-color: var(--background-color);
-  color: var(--text-color);
-}
-
-/* ----- Dark Theme Styles ----- */
-
-body[data-theme='dark'] {
-  --background-color: #252525;
-  --text-color: #fff;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
 }
 
 /* ----- h1, paragraphs etc ----- */
