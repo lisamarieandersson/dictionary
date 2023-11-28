@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import Header from './Header';
-import SearchForm from './SearchForm';
+import Header from './components/Header';
+import SearchForm from './components/SearchForm';
 
 function App() {
   const [theme, setTheme] = useState('light');
