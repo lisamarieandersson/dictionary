@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { expect } from 'vitest';
+import { expect, test } from 'vitest';
 import App from '../App';
 import mockWords from './mockWords.json';
 
@@ -58,6 +58,30 @@ test('should display new word after submission via enter', async () => {
     screen.getByText(
       /A beverage made by infusing the beans of the coffee plant in hot water./i
     )
+  ).toBeInTheDocument();
+});
+
+test('should display error message after empty submission via click', async () => {
+  render(<App />);
+  const user = userEvent.setup();
+
+  const searchButton = screen.getByRole('button', { name: /search/i });
+  await user.click(searchButton);
+
+  expect(
+    screen.getByText(/Please enter a word to search\./i)
+  ).toBeInTheDocument();
+});
+
+test('should display error message after empty submission via enter', async () => {
+  render(<App />);
+  const user = userEvent.setup();
+
+  const searchInput = screen.getByRole('textbox');
+  await user.type(searchInput, '{Enter}');
+
+  expect(
+    screen.getByText(/Please enter a word to search\./i)
   ).toBeInTheDocument();
 });
 
