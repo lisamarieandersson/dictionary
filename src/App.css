@@ -44,15 +44,7 @@
   outline: solid 0.1rem var(--color-light);
 }
 
-/* ----- Header styling ----- */
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* ----- Styling for compoment that toggles light and dark mode ----- */
+/* ----- Styling for input with label that toggles light and dark mode ----- */
 
 .theme-toggle-container {
   display: flex;
@@ -141,35 +133,4 @@ header {
   background-color: var(
     --color-dark
   ); /* This sets the knob color in light mode */
-}
-
-/* ----- Form with search input and button ----- */
-
-form {
-  display: flex;
-  gap: 0.5rem;
-}
-
-input {
-  border-radius: 99em;
-  padding: 1rem;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-  line-height: 1.5;
-  font-size: 1rem;
-  border: solid 0.1rem var(--color-dark);
-  width: 26rem;
-  pointer-events: all;
-}
-
-button {
-  border-radius: 99em;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-  line-height: 1.5;
-  font-size: 1rem;
-  border: none;
-  padding: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
 }
