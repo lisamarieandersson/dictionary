@@ -2,6 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
+import { expect } from 'vitest';
 import App from '../App';
 import mockWords from './mockWords.json';
 
@@ -74,6 +75,6 @@ test('should be able to switch from light to dark mode', async () => {
   await waitFor(() => {
     expect(appRoot).toHaveAttribute('data-theme', 'dark');
   });
-
-  // Kolla så att texten dark syns med!! sista grejen på detta test
+  // Check if the text "Dark Mode" is present in the document
+  expect(screen.getByText('Dark Mode')).toBeInTheDocument();
 });
