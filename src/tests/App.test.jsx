@@ -28,11 +28,11 @@ test('should display new word after submission via click', async () => {
   render(<App />);
   const user = userEvent.setup();
 
-  const input = screen.getByRole('textbox');
-  await user.type(input, 'coffee');
+  const searchInput = screen.getByRole('textbox');
+  await user.type(searchInput, 'coffee');
 
-  const button = screen.getByRole('button', { name: /search/i });
-  await user.click(button);
+  const searchButton = screen.getByRole('button', { name: /search/i });
+  await user.click(searchButton);
 
   await waitFor(() => {
     expect(screen.getByText('coffee')).toBeInTheDocument();
@@ -51,10 +51,10 @@ test('should display new word after submission via enter', async () => {
   render(<App />);
   const user = userEvent.setup();
 
-  const input = screen.getByRole('textbox');
-  await user.type(input, 'coffee');
+  const searchInput = screen.getByRole('textbox');
+  await user.type(searchInput, 'coffee');
 
-  await user.type(input, 'coffee{Enter}');
+  await user.type(searchInput, 'coffee{Enter}');
 
   await waitFor(() => {
     expect(screen.getByText('coffee')).toBeInTheDocument();
