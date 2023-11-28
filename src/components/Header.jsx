@@ -1,5 +1,6 @@
 // Header.js
 import React from 'react';
+import './Header.module.css';
 import ThemeToggle from './ThemeToggle';
 
 function Header({ theme, toggleTheme }) {

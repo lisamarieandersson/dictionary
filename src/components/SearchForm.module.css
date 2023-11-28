@@ -1,0 +1,32 @@
+/* ----- Form with search input and button ----- */
+
+form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+input {
+  border-radius: 99em;
+  padding: 0.8rem 1rem;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.5;
+  font-size: 1rem;
+  border: solid 0.1rem var(--color-dark);
+  width: 26rem;
+  pointer-events: all;
+}
+
+button {
+  border-radius: 99em;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.5;
+  font-size: 1rem;
+  border: none;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  width: 8rem;
+  transition: background-color 0.3s, color 0.3s;
+  text-transform: uppercase;
+}
