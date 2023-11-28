@@ -48,8 +48,6 @@ test('should display new word after submission via enter', async () => {
   const user = userEvent.setup();
 
   const searchInput = screen.getByRole('textbox');
-  await user.type(searchInput, 'coffee');
-
   await user.type(searchInput, 'coffee{Enter}');
 
   expect(screen.getByText('coffee')).toBeInTheDocument();
