@@ -39,7 +39,11 @@ test('should display new word after submission via click', async () => {
   });
 
   await waitFor(() => {
-    expect(screen.getByText('coffee')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /A beverage made by infusing the beans of the coffee plant in hot water./i
+      )
+    ).toBeInTheDocument();
   });
 });
 
@@ -57,7 +61,11 @@ test('should display new word after submission via enter', async () => {
   });
 
   await waitFor(() => {
-    expect(screen.getByText('coffee')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /A beverage made by infusing the beans of the coffee plant in hot water./i
+      )
+    ).toBeInTheDocument();
   });
 });
 
