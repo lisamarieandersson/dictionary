@@ -34,17 +34,13 @@ test('should display new word after submission via click', async () => {
   const searchButton = screen.getByRole('button', { name: /search/i });
   await user.click(searchButton);
 
-  await waitFor(() => {
-    expect(screen.getByText('coffee')).toBeInTheDocument();
-  });
+  expect(screen.getByText('coffee')).toBeInTheDocument();
 
-  await waitFor(() => {
-    expect(
-      screen.getByText(
-        /A beverage made by infusing the beans of the coffee plant in hot water./i
-      )
-    ).toBeInTheDocument();
-  });
+  expect(
+    screen.getByText(
+      /A beverage made by infusing the beans of the coffee plant in hot water./i
+    )
+  ).toBeInTheDocument();
 });
 
 test('should display new word after submission via enter', async () => {
@@ -56,17 +52,13 @@ test('should display new word after submission via enter', async () => {
 
   await user.type(searchInput, 'coffee{Enter}');
 
-  await waitFor(() => {
-    expect(screen.getByText('coffee')).toBeInTheDocument();
-  });
+  expect(screen.getByText('coffee')).toBeInTheDocument();
 
-  await waitFor(() => {
-    expect(
-      screen.getByText(
-        /A beverage made by infusing the beans of the coffee plant in hot water./i
-      )
-    ).toBeInTheDocument();
-  });
+  expect(
+    screen.getByText(
+      /A beverage made by infusing the beans of the coffee plant in hot water./i
+    )
+  ).toBeInTheDocument();
 });
 
 test('should be able to switch from light to dark mode', async () => {
