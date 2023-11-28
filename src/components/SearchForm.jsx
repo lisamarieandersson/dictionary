@@ -1,29 +1,44 @@
 // SearchForm.js
 import React, { useState } from 'react';
-import './SearchForm.module.css';
+import styles from './SearchForm.module.css';
 
 function SearchForm({ onSearch }) {
   const [query, setQuery] = useState('');
+  const [error, setError] = useState('');
 
   const handleInputChange = (event) => {
+    setError('');
     setQuery(event.target.value);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    onSearch(query); // Call the onSearch prop with the query
+    if (!query.trim()) {
+      setError('Please enter a word to search.'); // Sets error if input is empty
+    } else {
+      onSearch(query);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        id="word-search"
-        type="text"
-        value={query}
-        onChange={handleInputChange}
-        placeholder="Search for a word"
-      />
-      <button type="submit">Search</button>
+    <form className={styles['search-form']} onSubmit={handleSubmit}>
+      <div className={styles['search-bar']}>
+        <input
+          className={styles['search-input']}
+          id="word-search"
+          type="text"
+          value={query}
+          onChange={handleInputChange}
+          placeholder="Search for a word"
+        />
+        {error && (
+          <span className={styles['search-error-message']}>{error}</span>
+        )}{' '}
+        {/* Displays error message */}
+      </div>
+      <button className={styles['search-button']} type="submit">
+        Search
+      </button>
     </form>
   );
 }
