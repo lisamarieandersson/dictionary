@@ -44,7 +44,7 @@
   outline: solid 0.1rem var(--color-light);
 }
 
-/* ----- Styling for input with label that toggles light and dark mode ----- */
+/* ----- Styling ThemeToggle for light and dark mode (has to be global) ----- */
 
 .theme-toggle-container {
   display: flex;
