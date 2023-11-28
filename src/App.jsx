@@ -16,7 +16,6 @@ function App() {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
-  // Handle search for word
   const handleSearch = async (query) => {
     try {
       const response = await fetch(
