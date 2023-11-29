@@ -1,4 +1,3 @@
-// Header.js
 import React from 'react';
 import styles from './Header.module.css';
 import ThemeToggle from './ThemeToggle';
