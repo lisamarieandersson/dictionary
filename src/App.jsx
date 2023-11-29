@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import SearchForm from './components/SearchForm';
+import WordCard from './components/WordCard';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -39,35 +40,7 @@ function App() {
     <div className="App" ref={appRef} data-testid="app-root" data-theme={theme}>
       <Header theme={theme} toggleTheme={toggleTheme} />
       <SearchForm onSearch={handleSearch} />
-      {wordData && (
-        <div>
-          <h2>{wordData.word}</h2>
-          <ul>
-            {wordData.phonetics.map((phonetic, index) => (
-              <li key={index}>
-                {phonetic.text && <p>Phonetic: {phonetic.text}</p>}
-                {phonetic.audio && (
-                  <audio
-                    aria-label="word pronunciation"
-                    controls
-                    src={phonetic.audio}
-                  ></audio>
-                )}
-              </li>
-            ))}
-          </ul>
-          {wordData.meanings.map((meaning, index) => (
-            <div key={index}>
-              <h3>{meaning.partOfSpeech}</h3>
-              <ul>
-                {meaning.definitions.map((definition, idx) => (
-                  <li key={idx}>{definition.definition}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      )}
+      {wordData && <WordCard wordData={wordData} />}
     </div>
   );
 }
