@@ -1,4 +1,3 @@
-// ThemeToggle.js
 // Styling for this component needs to be global and is therefore located in App.css
 
 function ThemeToggle({ theme, toggleTheme }) {
