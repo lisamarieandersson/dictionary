@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import SearchForm from './components/SearchForm';
@@ -6,10 +6,13 @@ import SearchForm from './components/SearchForm';
 function App() {
   const [theme, setTheme] = useState('light');
   const [wordData, setWordData] = useState(null);
+  const appRef = useRef(null);
 
-  // Light and dark theme
+  // Update the theme on the App component
   useEffect(() => {
-    document.body.setAttribute('data-theme', theme);
+    if (appRef.current) {
+      appRef.current.setAttribute('data-theme', theme);
+    }
   }, [theme]);
 
   const toggleTheme = () => {
@@ -33,7 +36,7 @@ function App() {
   };
 
   return (
-    <div className="App" data-testid="app-root" data-theme={theme}>
+    <div className="App" ref={appRef} data-testid="app-root" data-theme={theme}>
       <Header theme={theme} toggleTheme={toggleTheme} />
       <SearchForm onSearch={handleSearch} />
       {wordData && (
@@ -44,7 +47,11 @@ function App() {
               <li key={index}>
                 {phonetic.text && <p>Phonetic: {phonetic.text}</p>}
                 {phonetic.audio && (
-                  <audio controls src={phonetic.audio}></audio>
+                  <audio
+                    aria-label="word pronunciation"
+                    controls
+                    src={phonetic.audio}
+                  ></audio>
                 )}
               </li>
             ))}
