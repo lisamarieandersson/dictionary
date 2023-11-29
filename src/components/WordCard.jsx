@@ -1,6 +1,8 @@
+import styles from './WordCard.module.css';
+
 function WordCard({ wordData }) {
   return (
-    <div>
+    <div className={styles['word-card-container']}>
       <h2>{wordData.word}</h2>
       <ul>
         {wordData.phonetics.map((phonetic, index) => (
