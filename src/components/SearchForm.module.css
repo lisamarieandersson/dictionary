@@ -17,22 +17,22 @@
   border-radius: 99em;
   padding: 0.8rem 1rem;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   line-height: 1.5;
   font-size: 1rem;
-  border: solid 0.1rem var(--color-dark);
+  border: solid 1.6px var(--color-dark);
   width: 26rem;
-  pointer-events: all;
 }
 
 .search-error-message {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 .search-button {
   border-radius: 99em;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
   line-height: 1.5;
   font-size: 1rem;
   border: none;
@@ -41,5 +41,4 @@
   width: 8rem;
   height: 3.187rem;
   transition: background-color 0.3s, color 0.3s;
-  text-transform: uppercase;
 }
