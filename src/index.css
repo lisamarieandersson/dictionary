@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Prata&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap');
 
 :root {
-  font-family: 'Prata', serif;
+  font-family: 'Space Grotesk', sans-serif;
   line-height: 1.5;
+  font-weight: 400;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -23,21 +24,23 @@ body {
   width: 100%;
 }
 
-/* ----- h1, paragraphs etc ----- */
+/* ----- h1, ul etc ----- */
 
 h1 {
-  font-size: 3.2em;
+  font-size: 3.25rem;
   line-height: 1.1;
 }
 
-p {
-  font-family: 'Poppins', sans-serif;
+h2 {
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 1.1;
 }
 
 ul {
   list-style: none;
-}
-
-li {
-  font-family: 'Poppins', sans-serif;
 }
