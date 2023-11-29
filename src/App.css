@@ -37,13 +37,13 @@
 .App[data-theme='dark'] button {
   background-color: var(--color-light);
   color: var(--color-dark);
-  outline: solid 0.1rem var(--color-light);
+  outline: solid 1.6px var(--color-light);
 }
 
 .App[data-theme='dark'] button:hover {
   background-color: var(--color-dark);
   color: var(--color-light);
-  outline: solid 0.1rem var(--color-light);
+  outline: solid 1.6px var(--color-light);
 }
 
 /* ----- Styling ThemeToggle for light and dark mode (has to be global) ----- */
@@ -56,7 +56,7 @@
 }
 
 .theme-toggle-text {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   text-transform: uppercase;
   padding-top: 0.5rem;
 }
@@ -67,7 +67,7 @@
   display: inline-block;
   width: 60px;
   height: 34px;
-  border: 2px solid var(--color-dark);
+  border: 1.6px solid var(--color-dark);
   border-radius: 34px;
   background-color: transparent;
 }
