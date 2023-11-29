@@ -18,7 +18,7 @@
   color: var(--text-color-light);
 }
 
-/* ----- Button styling for light and dark mode ----- */
+/* ----- Button styling for light mode ----- */
 
 .App[data-theme='light'] button {
   background-color: var(--color-dark);
@@ -31,6 +31,8 @@
   color: var(--color-dark);
   outline: solid 0.1rem var(--color-dark);
 }
+
+/* ----- Button styling for dark mode ----- */
 
 .App[data-theme='dark'] button {
   background-color: var(--color-light);
@@ -49,6 +51,8 @@
 .theme-toggle-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .theme-toggle-text {
