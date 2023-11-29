@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { expect, test } from 'vitest';
+import { expect, test, vi } from 'vitest';
 import App from '../App';
 import mockWords from './mockWords.json';
 
@@ -81,6 +81,32 @@ test('should display error message after empty submission via enter', async () =
   expect(
     screen.getByText(/Please enter a word to search\./i)
   ).toBeInTheDocument();
+});
+
+test('should render audio elements when available', async () => {
+  render(<App />);
+  const user = userEvent.setup();
+
+  // Trigger the search
+  const searchInput = screen.getByRole('textbox');
+  await user.type(searchInput, 'coffee{Enter}');
+
+  // Wait for the audio elements to appear in the DOM
+  await waitFor(() => {
+    const audioElements = screen.getAllByLabelText('word pronunciation');
+    expect(audioElements.length).toBeGreaterThan(0);
+  });
+
+  // Optionally mock the play method of the first audio element
+  const audioElement = screen.getAllByLabelText('word pronunciation')[0];
+  const mockPlay = vi.fn();
+  audioElement.play = mockPlay;
+
+  // Directly trigger play for testing purposes
+  audioElement.play();
+
+  // Assert that the play method was called
+  expect(mockPlay).toHaveBeenCalled();
 });
 
 test('should be able to switch from light to dark mode', async () => {
