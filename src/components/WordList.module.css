@@ -1,3 +1,9 @@
 .word-list-container {
   max-width: 50%;
 }
+
+.synonyms,
+.antonyms,
+.example {
+  font-weight: 600;
+}
