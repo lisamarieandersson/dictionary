@@ -1,5 +1,27 @@
 .word-list-container {
+  padding-top: 4rem;
   max-width: 50%;
+}
+
+.word-list-headline-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.word-list-favorite-button {
+  border-radius: 99em;
+  box-sizing: border-box;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  font-size: 1rem;
+  border: none;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  width: 6rem;
+  height: 3.187rem;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .synonyms,
