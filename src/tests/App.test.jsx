@@ -1,20 +1,9 @@
 // Integration tests / User flow tests for App
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
-import { expect, test, vi } from 'vitest';
+import { expect, test } from 'vitest';
 import App from '../App';
-import mockWords from './mockWords.json';
-
-const server = setupServer(
-  rest.get(
-    'https://api.dictionaryapi.dev/api/v2/entries/en/:word',
-    (req, res, ctx) => {
-      return res(ctx.json(mockWords)); // Return mock data
-    }
-  )
-);
+import { server } from '../mocks/server';
 
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
@@ -84,7 +73,19 @@ test('should display error message after empty submission via enter', async () =
   ).toBeInTheDocument();
 });
 
-test('should render audio elements when available', async () => {
+test('should display error message when a non-existent word in the API is searched', async () => {
+  render(<App />);
+  const user = userEvent.setup();
+
+  const searchInput = screen.getByRole('textbox');
+  await user.type(searchInput, 'kaffe{Enter}');
+
+  // Wait for the error message to appear
+  const errorMessage = await screen.findByText('Word not found');
+  expect(errorMessage).toBeInTheDocument();
+});
+
+test('should render audio elements when available and verify that their source is correct', async () => {
   render(<App />);
   const user = userEvent.setup();
 
@@ -96,18 +97,14 @@ test('should render audio elements when available', async () => {
   await waitFor(() => {
     const audioElements = screen.getAllByLabelText('word pronunciation');
     expect(audioElements.length).toBeGreaterThan(0);
+
+    // Verify the source of the first audio element
+    const firstAudioElement = audioElements[0];
+    expect(firstAudioElement).toHaveAttribute('src');
+    expect(firstAudioElement.src).toContain(
+      'https://api.dictionaryapi.dev/media/pronunciations/en/coffee-uk.mp3'
+    );
   });
-
-  // Optionally mock the play method of the first audio element
-  const audioElement = screen.getAllByLabelText('word pronunciation')[0];
-  const mockPlay = vi.fn();
-  audioElement.play = mockPlay;
-
-  // Directly trigger play for testing purposes
-  audioElement.play();
-
-  // Assert that the play method was called
-  expect(mockPlay).toHaveBeenCalled();
 });
 
 test('should be able to switch from light to dark mode', async () => {
@@ -116,6 +113,7 @@ test('should be able to switch from light to dark mode', async () => {
 
   const appRoot = screen.getByTestId('app-root');
   expect(appRoot).toHaveAttribute('data-theme', 'light');
+  expect(screen.getByText('Light Mode')).toBeInTheDocument();
 
   const toggle = screen.getByRole('checkbox', { name: /Dark Mode/i });
   await user.click(toggle);
