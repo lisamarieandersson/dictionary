@@ -7,16 +7,15 @@ export const handlers = [
     (req, res, ctx) => {
       const word = req.params.word;
 
-      if (word === 'coffee') {
-        return res(ctx.json(mockWords)); // Mock response for 'coffee'
+      // Find the mock data for the requested word
+      const mockData = mockWords.find((mockWord) => mockWord.word === word);
+
+      if (mockData) {
+        return res(ctx.json([mockData])); // Return the mock data for the requested word
       }
 
-      if (word === 'kaffe') {
-        // Simulate a 404 response for the nonexistent word
-        return res(ctx.status(404), ctx.json({ message: 'Word not found' }));
-      }
-
-      // Might add other handlers as needed...
+      // Fallback if the the word isn't found in the mock data, simulate a 404 response
+      return res(ctx.status(404), ctx.json({ message: 'Word not found' }));
     }
   ),
 ];
