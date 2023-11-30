@@ -1,9 +1,17 @@
 import styles from './WordList.module.css';
 
-function WordList({ wordData }) {
+function WordList({ wordData, onToggleFavorite, isFavorite }) {
   return (
     <div className={styles['word-list-container']}>
-      <h2>{wordData.word}</h2>
+      <div className={styles['word-list-headline-container']}>
+        <h2>{wordData.word}</h2>
+        <button
+          className={styles['word-list-favorite-button']}
+          onClick={() => onToggleFavorite(wordData.word)}
+        >
+          {isFavorite(wordData.word) ? 'Unfavorite' : 'Favorite'}
+        </button>
+      </div>
       <ul>
         {wordData.phonetics.map((phonetic, index) => (
           <li key={index}>
