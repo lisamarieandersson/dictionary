@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import SearchForm from './components/SearchForm';
-import WordCard from './components/WordCard';
+import WordList from './components/WordList';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -40,7 +40,7 @@ function App() {
     <div className="App" ref={appRef} data-testid="app-root" data-theme={theme}>
       <Header theme={theme} toggleTheme={toggleTheme} />
       <SearchForm onSearch={handleSearch} />
-      {wordData && <WordCard wordData={wordData} />}
+      {wordData && <WordList wordData={wordData} />}
     </div>
   );
 }
