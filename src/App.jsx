@@ -1,14 +1,25 @@
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
+import FavoritesList from './components/FavoritesList';
 import Header from './components/Header';
 import SearchForm from './components/SearchForm';
 import WordList from './components/WordList';
+import useFavorites from './hooks/useFavorites';
 
 function App() {
   const [theme, setTheme] = useState('light');
   const [wordData, setWordData] = useState(null);
   const [error, setError] = useState(null);
   const appRef = useRef(null);
+  const { favorites, addFavorite, removeFavorite, isFavorite } = useFavorites();
+
+  const toggleFavorite = (word) => {
+    if (isFavorite(word)) {
+      removeFavorite(word);
+    } else {
+      addFavorite(word);
+    }
+  };
 
   // Update the theme on the App component
   useEffect(() => {
@@ -45,7 +56,14 @@ function App() {
       <SearchForm onSearch={handleSearch} />
       {error && <div className="error-message">{error}</div>}{' '}
       {/* Display error message */}
-      {wordData && <WordList wordData={wordData} />}
+      {wordData && (
+        <WordList
+          wordData={wordData}
+          onToggleFavorite={toggleFavorite}
+          isFavorite={isFavorite}
+        />
+      )}
+      <FavoritesList favorites={favorites} removeFavorite={removeFavorite} />
     </div>
   );
 }
