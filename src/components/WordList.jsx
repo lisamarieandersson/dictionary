@@ -23,7 +23,24 @@ function WordList({ wordData }) {
           <h3>{meaning.partOfSpeech}</h3>
           <ul>
             {meaning.definitions.map((definition, idx) => (
-              <li key={idx}>{definition.definition}</li>
+              <li key={idx}>
+                {definition.definition}
+                {definition.synonyms && definition.synonyms.length > 0 && (
+                  <p className={styles['synonyms']}>
+                    Synonyms: {definition.synonyms.slice(0, 3).join(', ')}
+                  </p>
+                )}
+                {definition.antonyms && definition.antonyms.length > 0 && (
+                  <p className={styles['antonyms']}>
+                    Antonyms: {definition.antonyms.slice(0, 3).join(', ')}
+                  </p>
+                )}
+                {definition.example && (
+                  <p className={styles['example']}>
+                    Example: {definition.example}
+                  </p>
+                )}
+              </li>
             ))}
           </ul>
         </div>
