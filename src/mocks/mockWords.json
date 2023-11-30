@@ -10,6 +10,10 @@
       {
         "text": "/ˈkɒ.fi/",
         "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/coffee-uk.mp3"
+      },
+      {
+        "text": "/ˈkɔ.fi/",
+        "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/coffee-us.mp3"
       }
     ],
     "meanings": [
@@ -21,10 +25,116 @@
           },
           {
             "definition": "The seeds of the plant used to make coffee, misnamed ‘beans’ due to their shape."
+          },
+          {
+            "definition": "The powder made by roasting and grinding the seeds."
+          },
+          {
+            "definition": "A tropical plant of the genus Coffea."
+          },
+          {
+            "definition": "A pale brown colour, like that of milk coffee."
+          },
+          {
+            "definition": "The end of a meal, when coffee is served.",
+            "example": "He did not stay for coffee."
+          }
+        ]
+      },
+      {
+        "partOfSpeech": "verb",
+        "definitions": [
+          {
+            "definition": "To drink coffee."
+          }
+        ]
+      },
+      {
+        "partOfSpeech": "adjective",
+        "definitions": [
+          {
+            "definition": "Of a pale brown colour, like that of milk coffee."
+          },
+          {
+            "definition": "Of a table: a small, low table suitable for people in lounge seating to put coffee cups on."
           }
         ]
       }
     ],
     "sourceUrls": ["https://en.wiktionary.org/wiki/coffee"]
+  },
+  {
+    "word": "ephemeral",
+    "phonetic": "/əˈfɛ.mə.ɹəl/",
+    "phonetics": [
+      {
+        "text": "/əˈfɛ.mə.ɹəl/",
+        "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ephemeral-us.mp3",
+        "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=2526689",
+        "license": {
+          "name": "BY-SA 3.0",
+          "url": "https://creativecommons.org/licenses/by-sa/3.0"
+        }
+      }
+    ],
+    "meanings": [
+      {
+        "partOfSpeech": "noun",
+        "definitions": [
+          {
+            "definition": "Something which lasts for a short period of time.",
+            "synonyms": ["ephemeron"],
+            "antonyms": []
+          }
+        ],
+        "synonyms": ["ephemeron"],
+        "antonyms": []
+      },
+      {
+        "partOfSpeech": "adjective",
+        "definitions": [
+          {
+            "definition": "Lasting for a short period of time.",
+            "synonyms": [
+              "evanescent",
+              "fleeting",
+              "momentary",
+              "short",
+              "short-lived",
+              "temporary",
+              "transitory",
+              "volatile"
+            ],
+            "antonyms": ["eternal", "everlasting", "permanent", "timeless"]
+          },
+          {
+            "definition": "Existing for only one day, as with some flowers, insects, and diseases.",
+            "synonyms": [],
+            "antonyms": []
+          },
+          {
+            "definition": "(of a body of water) Usually dry, but filling with water for brief periods during and after precipitation.",
+            "synonyms": [],
+            "antonyms": []
+          }
+        ],
+        "synonyms": [
+          "evanescent",
+          "fleeting",
+          "momentary",
+          "short",
+          "short-lived",
+          "temporary",
+          "transitory",
+          "volatile"
+        ],
+        "antonyms": ["eternal", "everlasting", "permanent", "timeless"]
+      }
+    ],
+    "license": {
+      "name": "CC BY-SA 3.0",
+      "url": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    "sourceUrls": ["https://en.wiktionary.org/wiki/ephemeral"]
   }
 ]
