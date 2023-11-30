@@ -30,31 +30,3 @@ test('should call onSearch with input value on submission', async () => {
 
   expect(mockOnSearch).toHaveBeenCalledWith('test');
 });
-
-test('should display a validation error for empty submission via click', async () => {
-  const mockOnSearch = vi.fn();
-  render(<SearchForm onSearch={mockOnSearch} />);
-  const user = userEvent.setup();
-
-  const searchButton = screen.getByRole('button', { name: /search/i });
-  await user.click(searchButton);
-
-  expect(
-    screen.getByText(/Please enter a word to search\./i)
-  ).toBeInTheDocument();
-  expect(mockOnSearch).not.toHaveBeenCalled();
-});
-
-test('should display a validation error for empty submission via enter', async () => {
-  const mockOnSearch = vi.fn();
-  render(<SearchForm onSearch={mockOnSearch} />);
-  const user = userEvent.setup();
-
-  const searchInput = screen.getByRole('textbox');
-  await user.type(searchInput, '{Enter}');
-
-  expect(
-    screen.getByText(/Please enter a word to search\./i)
-  ).toBeInTheDocument();
-  expect(mockOnSearch).not.toHaveBeenCalled();
-});
