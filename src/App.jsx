@@ -7,6 +7,7 @@ import WordList from './components/WordList';
 function App() {
   const [theme, setTheme] = useState('light');
   const [wordData, setWordData] = useState(null);
+  const [error, setError] = useState(null);
   const appRef = useRef(null);
 
   // Update the theme on the App component
@@ -26,13 +27,15 @@ function App() {
         `https://api.dictionaryapi.dev/api/v2/entries/en/${query}`
       );
       if (!response.ok) {
-        throw new Error('Word not found');
+        throw new Error('Word not found'); // This message will be shown to the user
       }
       const data = await response.json();
       setWordData(data[0]); // Storing the first result
+      setError(null); // Clear any existing errors on successful fetch
     } catch (error) {
       console.error('Error fetching data:', error);
       setWordData(null); // Resetting the state in case of an error
+      setError(error.message); // Set the error message
     }
   };
 
@@ -40,6 +43,8 @@ function App() {
     <div className="App" ref={appRef} data-testid="app-root" data-theme={theme}>
       <Header theme={theme} toggleTheme={toggleTheme} />
       <SearchForm onSearch={handleSearch} />
+      {error && <div className="error-message">{error}</div>}{' '}
+      {/* Display error message */}
       {wordData && <WordList wordData={wordData} />}
     </div>
   );
