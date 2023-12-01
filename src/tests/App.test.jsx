@@ -19,6 +19,40 @@ test('should render the correct header', () => {
   expect(screen.getByText('Dictionary')).toBeInTheDocument();
 });
 
+test('should allow user to type in the search input', async () => {
+  render(<App />);
+  const user = userEvent.setup();
+  const searchInput = screen.getByRole('textbox');
+
+  await user.type(searchInput, 'asd');
+
+  expect(searchInput).toHaveValue('asd');
+});
+
+test('should clear the search input after search with click', async () => {
+  render(<App />);
+  const user = userEvent.setup();
+  const searchInput = screen.getByRole('textbox');
+  const searchButton = screen.getByRole('button', { name: /search/i });
+
+  // Simulate typing and then searching
+  await user.type(searchInput, 'coffee');
+  await user.click(searchButton);
+
+  // Alternatively, if the clearing happens synchronously, you could directly assert
+  expect(searchInput).toHaveValue('');
+});
+
+test('should clear the search input after search with enter', async () => {
+  render(<App />);
+  const user = userEvent.setup();
+  const searchInput = screen.getByRole('textbox');
+  await user.type(searchInput, 'coffee{Enter}');
+
+  // Alternatively, if the clearing happens synchronously, you could directly assert
+  expect(searchInput).toHaveValue('');
+});
+
 test('should display new word after submission via click', async () => {
   render(<App />);
   const user = userEvent.setup();
@@ -128,7 +162,7 @@ test('should display error message when a non-existent word in the API is search
   await user.type(searchInput, 'kaffe{Enter}');
 
   // Wait for the error message to appear
-  const errorMessage = await screen.findByText('Word not found');
+  const errorMessage = await screen.findByText(/Word not found/i);
   expect(errorMessage).toBeInTheDocument();
 });
 
