@@ -1,5 +1,5 @@
 // Integration tests / User flow tests for App
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect, test } from 'vitest';
 import App from '../App';
@@ -8,6 +8,11 @@ import { server } from '../mocks/server';
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
+
+beforeEach(() => {
+  // Clear session storage or reset global state
+  sessionStorage.clear();
+});
 
 test('should render the correct header', () => {
   render(<App />);
@@ -168,6 +173,77 @@ test('should render audio elements when available and verify that their source i
       'https://api.dictionaryapi.dev/media/pronunciations/en/coffee-uk.mp3'
     );
   });
+});
+
+test('should be able to add a word as a favorite and see it in the favorites list', async () => {
+  render(<App />);
+  const user = userEvent.setup();
+
+  // Search for a word first
+  const searchInput = screen.getByRole('textbox');
+  const searchButton = screen.getByRole('button', { name: /search/i });
+
+  await user.type(searchInput, 'ephemeral');
+  await user.click(searchButton);
+
+  // Wait for 'ephemeral' to be displayed after search
+  await waitFor(() => {
+    expect(screen.getByText('ephemeral')).toBeInTheDocument();
+  });
+
+  // Click on the "Add To Favorites" button
+  const addToFavoritesButton = screen.getByRole('button', {
+    name: /add to favorites/i,
+  });
+  await user.click(addToFavoritesButton);
+
+  // Click on the "Favorites" button to view the favorites list
+  const viewFavoritesButton = screen.getByRole('button', {
+    name: /favorites/i,
+  });
+  await user.click(viewFavoritesButton);
+
+  // Check if the favorited word 'ephemeral' is in the favorites list
+  expect(screen.getByText('ephemeral')).toBeInTheDocument();
+});
+
+test('should be able to remove a word from the favorites list', async () => {
+  render(<App />);
+  const user = userEvent.setup();
+
+  // Search for the word and wait for it to appear
+  const searchInput = screen.getByRole('textbox');
+  const searchButton = screen.getByRole('button', { name: /search/i });
+  await user.type(searchInput, 'ephemeral');
+  await user.click(searchButton);
+
+  await waitFor(() =>
+    expect(screen.getByText('ephemeral')).toBeInTheDocument()
+  );
+
+  // Click the "Add To Favorites" button
+  const addToFavoritesButton = screen.getByRole('button', {
+    name: /add to favorites/i,
+  });
+  await user.click(addToFavoritesButton);
+
+  // Navigate to the favorites list
+  const viewFavoritesButton = screen.getByRole('button', {
+    name: /favorites/i,
+  });
+  await user.click(viewFavoritesButton);
+
+  // Ensure 'ephemeral' is in the favorites list
+  expect(screen.getByText('ephemeral')).toBeInTheDocument();
+
+  // Find and click the remove button for 'ephemeral'
+  const removeButton = within(
+    screen.getByText('ephemeral').closest('li')
+  ).getByRole('button', { name: /remove/i });
+  await user.click(removeButton);
+
+  // Verify 'ephemeral' is no longer in the favorites list
+  expect(screen.queryByText('ephemeral')).not.toBeInTheDocument();
 });
 
 test('should be able to switch from light to dark mode', async () => {
