@@ -1,7 +1,30 @@
 /* ----- Header styling ----- */
 
-header {
+.header-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 10rem;
+}
+
+.header-button-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.header-toggle-favorites-back-to-search-button {
+  border-radius: 99em;
+  box-sizing: border-box;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  max-width: 12rem;
+  height: 2.125rem;
+  transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
