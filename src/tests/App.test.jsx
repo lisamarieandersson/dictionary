@@ -39,7 +39,6 @@ test('should clear the search input after search with click', async () => {
   await user.type(searchInput, 'coffee');
   await user.click(searchButton);
 
-  // Alternatively, if the clearing happens synchronously, you could directly assert
   expect(searchInput).toHaveValue('');
 });
 
