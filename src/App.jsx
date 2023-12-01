@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
-import FavoritesList from './components/FavoritesList';
+import FavoriteList from './components/FavoriteList';
 import Header from './components/Header';
 import SearchForm from './components/SearchForm';
 import WordList from './components/WordList';
@@ -73,7 +73,6 @@ function App() {
       {!showFavorites && (
         <SearchForm onSearch={handleSearch} query={query} setQuery={setQuery} />
       )}
-      {/* Render error message only when not showing favorites and there is an error */}
       {!showFavorites && error && (
         <div className="App-error-message">{error}</div>
       )}
@@ -85,7 +84,7 @@ function App() {
         />
       )}
       {showFavorites && (
-        <FavoritesList favorites={favorites} removeFavorite={removeFavorite} />
+        <FavoriteList favorites={favorites} removeFavorite={removeFavorite} />
       )}
     </div>
   );
