@@ -46,6 +46,21 @@
   outline: solid 1.6px var(--color-light);
 }
 
+.App-line.light {
+  border-top: 1.2px solid var(--color-dark);
+  margin-bottom: 3rem;
+}
+
+.App-line.dark {
+  border-top: 1.2px solid var(--color-light);
+  margin-bottom: 3rem;
+}
+
+.App-error-message {
+  text-align: center;
+  padding-top: 0.5rem;
+}
+
 /* ----- Styling ThemeToggle for light and dark mode (has to be global) ----- */
 
 .theme-toggle-container {
@@ -137,14 +152,4 @@
   background-color: var(
     --color-dark
   ); /* This sets the knob color in light mode */
-}
-
-.line.light {
-  border-top: 1.2px solid var(--color-dark);
-  margin-bottom: 3rem;
-}
-
-.line.dark {
-  border-top: 1.2px solid var(--color-light);
-  margin-bottom: 3rem;
 }
