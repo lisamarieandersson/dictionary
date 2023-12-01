@@ -138,3 +138,13 @@
     --color-dark
   ); /* This sets the knob color in light mode */
 }
+
+.line.light {
+  border-top: 1.2px solid var(--color-dark);
+  margin-bottom: 3rem;
+}
+
+.line.dark {
+  border-top: 1.2px solid var(--color-light);
+  margin-bottom: 3rem;
+}
