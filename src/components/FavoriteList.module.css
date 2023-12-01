@@ -1,8 +1,11 @@
-.favorites-list-container {
+.favorite-list-container {
+  max-width: 50%;
+}
+
+.favorite-list-word-container {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding-top: 4rem;
+  gap: 2rem;
 }
 
 .favorite-remove-button {
@@ -26,4 +29,10 @@
   align-items: center;
   gap: 1rem;
   max-width: 30%;
+}
+
+.favorite-list-synonyms,
+.favorite-list-antonyms,
+.favorite-list-example {
+  font-weight: 600;
 }
