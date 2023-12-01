@@ -26,8 +26,8 @@
   align-items: center;
 }
 
-.synonyms,
-.antonyms,
-.example {
+.word-list-synonyms,
+.word-list-antonyms,
+.word-list-example {
   font-weight: 600;
 }
