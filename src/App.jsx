@@ -10,8 +10,9 @@ function App() {
   const [theme, setTheme] = useState('light');
   const [wordData, setWordData] = useState(null);
   const [error, setError] = useState(null);
-  const appRef = useRef(null);
   const { favorites, addFavorite, removeFavorite, isFavorite } = useFavorites();
+  const [showFavorites, setShowFavorites] = useState(false);
+  const appRef = useRef(null);
 
   const toggleFavorite = (word) => {
     if (isFavorite(word)) {
@@ -20,6 +21,9 @@ function App() {
       addFavorite(word);
     }
   };
+
+  // Toggle between search and favorites view
+  const toggleView = () => setShowFavorites(!showFavorites);
 
   // Update the theme on the App component
   useEffect(() => {
@@ -52,18 +56,27 @@ function App() {
 
   return (
     <div className="App" ref={appRef} data-testid="app-root" data-theme={theme}>
-      <Header theme={theme} toggleTheme={toggleTheme} />
-      <SearchForm onSearch={handleSearch} />
-      {error && <div className="error-message">{error}</div>}{' '}
-      {/* Display error message */}
-      {wordData && (
+      <Header
+        theme={theme}
+        toggleTheme={toggleTheme}
+        toggleView={toggleView}
+        showFavorites={showFavorites}
+        data-theme={theme}
+      />
+      <div className={`line ${theme}`}></div>{' '}
+      {/* This div represents the line */}
+      {!showFavorites && <SearchForm onSearch={handleSearch} />}
+      {error && <div className="error-message">{error}</div>}
+      {!showFavorites && wordData && (
         <WordList
           wordData={wordData}
           onToggleFavorite={toggleFavorite}
           isFavorite={isFavorite}
         />
       )}
-      <FavoritesList favorites={favorites} removeFavorite={removeFavorite} />
+      {showFavorites && (
+        <FavoritesList favorites={favorites} removeFavorite={removeFavorite} />
+      )}
     </div>
   );
 }
