@@ -8,7 +8,7 @@ The application is developed using JavaScript, CSS, and React. For testing, the 
 
 ## Setting up the project
 
-Install the local dependencies by simply running:
+Install the local dependencies by running:
 
 ```sh
 npm install
