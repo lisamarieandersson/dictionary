@@ -1,7 +1,7 @@
 // Integration tests / User flow tests for App
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { expect, test } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import App from '../App';
 import { server } from '../mocks/server';
 
@@ -14,247 +14,302 @@ beforeEach(() => {
   sessionStorage.clear();
 });
 
-test('should render the correct header', () => {
-  render(<App />);
-  expect(screen.getByText('Dictionary')).toBeInTheDocument();
+describe('Search form', () => {
+  test('should allow user to type in the search input', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'asd');
+
+    expect(searchInput).toHaveValue('asd');
+  });
+
+  test('should clear the search input after search with click', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    const searchInput = screen.getByRole('textbox');
+    const searchButton = screen.getByRole('button', { name: /search/i });
+
+    // Simulate typing and then searching
+    await user.type(searchInput, 'coffee');
+    await user.click(searchButton);
+
+    expect(searchInput).toHaveValue('');
+  });
+
+  test('should clear the search input after search with enter', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'coffee{Enter}');
+
+    expect(searchInput).toHaveValue('');
+  });
 });
 
-test('should allow user to type in the search input', async () => {
-  render(<App />);
-  const user = userEvent.setup();
-  const searchInput = screen.getByRole('textbox');
+describe('Search for a word', () => {
+  test('should display the searched word via click', async () => {
+    render(<App />);
+    const user = userEvent.setup();
 
-  await user.type(searchInput, 'asd');
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'coffee');
 
-  expect(searchInput).toHaveValue('asd');
+    const searchButton = screen.getByRole('button', { name: /search/i });
+    await user.click(searchButton);
+
+    expect(screen.getByText('coffee')).toBeInTheDocument();
+  });
+
+  test('should display the searched word via enter', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'coffee{Enter}');
+
+    expect(screen.getByText('coffee')).toBeInTheDocument();
+  });
 });
 
-test('should clear the search input after search with click', async () => {
-  render(<App />);
-  const user = userEvent.setup();
-  const searchInput = screen.getByRole('textbox');
-  const searchButton = screen.getByRole('button', { name: /search/i });
+describe('Word definition: Phonetics', () => {
+  test('should display phonetics of the searched word via click', async () => {
+    render(<App />);
+    const user = userEvent.setup();
 
-  // Simulate typing and then searching
-  await user.type(searchInput, 'coffee');
-  await user.click(searchButton);
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'coffee');
 
-  expect(searchInput).toHaveValue('');
+    const searchButton = screen.getByRole('button', { name: /search/i });
+    await user.click(searchButton);
+
+    expect(screen.getByText('Phonetic: /ˈkɑ.fi/')).toBeInTheDocument();
+  });
+
+  test('should display phonetics of the searched word via enter', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'coffee{Enter}');
+    expect(screen.getByText('Phonetic: /ˈkɑ.fi/')).toBeInTheDocument();
+  });
 });
 
-test('should clear the search input after search with enter', async () => {
-  render(<App />);
-  const user = userEvent.setup();
-  const searchInput = screen.getByRole('textbox');
-  await user.type(searchInput, 'coffee{Enter}');
+describe('Word definition: Example', () => {
+  test('should display "example" in definitions of the searched word via click', async () => {
+    render(<App />);
+    const user = userEvent.setup();
 
-  expect(searchInput).toHaveValue('');
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'coffee');
+
+    const searchButton = screen.getByRole('button', { name: /search/i });
+    await user.click(searchButton);
+
+    expect(
+      screen.getByText('Example: He did not stay for coffee.')
+    ).toBeInTheDocument();
+  });
+
+  test('should display "example" in definitions of the searched word via enter', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'coffee{Enter}');
+
+    expect(
+      screen.getByText('Example: He did not stay for coffee.')
+    ).toBeInTheDocument();
+  });
 });
 
-test('should display the searched word via click', async () => {
-  render(<App />);
-  const user = userEvent.setup();
-  const searchInput = screen.getByRole('textbox');
-  await user.type(searchInput, 'coffee');
+describe('Word definition: Noun', () => {
+  test('should display noun definitions of the searched word via click', async () => {
+    render(<App />);
+    const user = userEvent.setup();
 
-  const searchButton = screen.getByRole('button', { name: /search/i });
-  await user.click(searchButton);
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'coffee');
 
-  expect(screen.getByText('coffee')).toBeInTheDocument();
+    const searchButton = screen.getByRole('button', { name: /search/i });
+    await user.click(searchButton);
+
+    expect(screen.getByText('noun')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'A beverage made by infusing the beans of the coffee plant in hot water.'
+      )
+    ).toBeInTheDocument();
+  });
+
+  test('should display noun definitions of the searched word via enter', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'coffee{Enter}');
+
+    expect(screen.getByText('noun')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'A beverage made by infusing the beans of the coffee plant in hot water.'
+      )
+    ).toBeInTheDocument();
+  });
 });
 
-test('should display phonetics of the word via click', async () => {
-  render(<App />);
-  const user = userEvent.setup();
-  const searchInput = screen.getByRole('textbox');
-  await user.type(searchInput, 'coffee');
+describe('Word definition: Verb', () => {
+  test('should display verb definitions of the searched word via click', async () => {
+    render(<App />);
+    const user = userEvent.setup();
 
-  const searchButton = screen.getByRole('button', { name: /search/i });
-  await user.click(searchButton);
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'coffee');
 
-  expect(screen.getByText(/ˈkɑ.fi/i)).toBeInTheDocument();
+    const searchButton = screen.getByRole('button', { name: /search/i });
+    await user.click(searchButton);
+
+    expect(screen.getByText('verb')).toBeInTheDocument();
+    expect(screen.getByText('To drink coffee.')).toBeInTheDocument();
+  });
+
+  test('should display verb definitions of the searched word via enter', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'coffee{Enter}');
+
+    expect(screen.getByText('verb')).toBeInTheDocument();
+    expect(screen.getByText('To drink coffee.')).toBeInTheDocument();
+  });
 });
 
-test('should display example in definitions via click', async () => {
-  render(<App />);
-  const user = userEvent.setup();
-  const searchInput = screen.getByRole('textbox');
-  await user.type(searchInput, 'coffee');
+describe('Word definition: Adjective', () => {
+  test('should display adjective definitions of the searched word via click', async () => {
+    render(<App />);
+    const user = userEvent.setup();
 
-  const searchButton = screen.getByRole('button', { name: /search/i });
-  await user.click(searchButton);
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'coffee');
 
-  expect(
-    screen.getByText('Example: He did not stay for coffee.')
-  ).toBeInTheDocument();
+    const searchButton = screen.getByRole('button', { name: /search/i });
+    await user.click(searchButton);
+
+    expect(screen.getByText('adjective')).toBeInTheDocument();
+    expect(
+      screen.getByText('Of a pale brown colour, like that of milk coffee.')
+    ).toBeInTheDocument();
+  });
+
+  test('should display adjective definitions of the searched word via enter', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'coffee{Enter}');
+
+    expect(screen.getByText('adjective')).toBeInTheDocument();
+    expect(
+      screen.getByText('Of a pale brown colour, like that of milk coffee.')
+    ).toBeInTheDocument();
+  });
 });
 
-test('should display noun definitions via click', async () => {
-  render(<App />);
-  const user = userEvent.setup();
-  const searchInput = screen.getByRole('textbox');
-  await user.type(searchInput, 'coffee');
+describe('Word definition: Synonym', () => {
+  test('should display synonyms of the searched word via click', async () => {
+    render(<App />);
+    const user = userEvent.setup();
 
-  const searchButton = screen.getByRole('button', { name: /search/i });
-  await user.click(searchButton);
+    // Search for 'ephemeral'
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'ephemeral');
+    const searchButton = screen.getByRole('button', { name: /search/i });
+    await user.click(searchButton);
 
-  expect(screen.getByText('noun')).toBeInTheDocument();
-  expect(
-    screen.getByText(
-      'A beverage made by infusing the beans of the coffee plant in hot water.'
-    )
-  ).toBeInTheDocument();
+    // Wait for the synonyms section to be displayed
+    const synonymsSection = await screen.findByText(/Synonyms: ephemeron/i);
+    expect(synonymsSection).toBeInTheDocument();
+  });
 });
 
-test('should display verb definitions via click', async () => {
-  render(<App />);
-  const user = userEvent.setup();
-  const searchInput = screen.getByRole('textbox');
-  await user.type(searchInput, 'coffee');
+describe('Word definition: Antonym', () => {
+  test('should display antonyms of the searched word via click', async () => {
+    render(<App />);
+    const user = userEvent.setup();
 
-  const searchButton = screen.getByRole('button', { name: /search/i });
-  await user.click(searchButton);
+    // Search for 'ephemeral'
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'ephemeral');
+    const searchButton = screen.getByRole('button', { name: /search/i });
+    await user.click(searchButton);
 
-  expect(screen.getByText('verb')).toBeInTheDocument();
-  expect(screen.getByText('To drink coffee.')).toBeInTheDocument();
+    // Wait for the antonyms section to be displayed
+    const antonymsSection = await screen.findByText(
+      /Antonyms: eternal, everlasting, permanent/i
+    );
+    expect(antonymsSection).toBeInTheDocument();
+  });
 });
 
-test('should display adjective definitions via click', async () => {
-  render(<App />);
-  const user = userEvent.setup();
-  const searchInput = screen.getByRole('textbox');
-  await user.type(searchInput, 'coffee');
+describe('Error messages', () => {
+  test('should display error message after empty submission via click', async () => {
+    render(<App />);
+    const user = userEvent.setup();
 
-  const searchButton = screen.getByRole('button', { name: /search/i });
-  await user.click(searchButton);
+    const searchButton = screen.getByRole('button', { name: /search/i });
+    await user.click(searchButton);
 
-  expect(screen.getByText('adjective')).toBeInTheDocument();
-  expect(
-    screen.getByText('Of a pale brown colour, like that of milk coffee.')
-  ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Please enter a word to search\./i)
+    ).toBeInTheDocument();
+  });
+
+  test('should display error message after empty submission via enter', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, '{Enter}');
+
+    expect(
+      screen.getByText(/Please enter a word to search\./i)
+    ).toBeInTheDocument();
+  });
+
+  test('should display error message when a non-existent word in the API is searched via click', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    const searchInput = screen.getByRole('textbox');
+    const searchButton = screen.getByRole('button', { name: /search/i });
+    await user.type(searchInput, 'kaffe');
+    await user.click(searchButton);
+
+    // Wait for the error message to appear
+    const errorMessage = await screen.findByText(/Word not found/i);
+    expect(errorMessage).toBeInTheDocument();
+  });
+
+  test('should display error message when a non-existent word in the API is searched via enter', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'kaffe{Enter}');
+
+    // Wait for the error message to appear
+    const errorMessage = await screen.findByText(/Word not found/i);
+    expect(errorMessage).toBeInTheDocument();
+  });
 });
 
-test('should display the searched word via enter', async () => {
-  render(<App />);
-  const user = userEvent.setup();
-  const searchInput = screen.getByRole('textbox');
-  await user.type(searchInput, 'coffee{Enter}');
-  expect(screen.getByText('coffee')).toBeInTheDocument();
-});
-
-test('should display phonetics of the searched word via enter', async () => {
-  render(<App />);
-  const user = userEvent.setup();
-  const searchInput = screen.getByRole('textbox');
-  await user.type(searchInput, 'coffee{Enter}');
-  expect(screen.getByText(/ˈkɑ.fi/i)).toBeInTheDocument();
-});
-
-test('should display example in definitions via enter', async () => {
-  render(<App />);
-  const user = userEvent.setup();
-  const searchInput = screen.getByRole('textbox');
-  await user.type(searchInput, 'coffee{Enter}');
-  expect(
-    screen.getByText('Example: He did not stay for coffee.')
-  ).toBeInTheDocument();
-});
-
-test('should display noun definitions via enter', async () => {
-  render(<App />);
-  const user = userEvent.setup();
-
-  const searchInput = screen.getByRole('textbox');
-  await user.type(searchInput, 'coffee{Enter}');
-  expect(screen.getByText('noun')).toBeInTheDocument();
-  expect(
-    screen.getByText(
-      'A beverage made by infusing the beans of the coffee plant in hot water.'
-    )
-  ).toBeInTheDocument();
-});
-
-test('should display verb definitions via enter', async () => {
-  render(<App />);
-  const user = userEvent.setup();
-
-  const searchInput = screen.getByRole('textbox');
-  await user.type(searchInput, 'coffee{Enter}');
-  expect(screen.getByText('verb')).toBeInTheDocument();
-  expect(screen.getByText('To drink coffee.')).toBeInTheDocument();
-});
-
-test('should display adjective definitions via enter', async () => {
-  render(<App />);
-  const user = userEvent.setup();
-
-  const searchInput = screen.getByRole('textbox');
-  await user.type(searchInput, 'coffee{Enter}');
-  expect(screen.getByText('adjective')).toBeInTheDocument();
-  expect(
-    screen.getByText('Of a pale brown colour, like that of milk coffee.')
-  ).toBeInTheDocument();
-});
-
-test('should display error message after empty submission via click', async () => {
-  render(<App />);
-  const user = userEvent.setup();
-
-  const searchButton = screen.getByRole('button', { name: /search/i });
-  await user.click(searchButton);
-
-  expect(
-    screen.getByText(/Please enter a word to search\./i)
-  ).toBeInTheDocument();
-});
-
-test('should display error message after empty submission via enter', async () => {
-  render(<App />);
-  const user = userEvent.setup();
-
-  const searchInput = screen.getByRole('textbox');
-  await user.type(searchInput, '{Enter}');
-
-  expect(
-    screen.getByText(/Please enter a word to search\./i)
-  ).toBeInTheDocument();
-});
-
-test('should display error message when a non-existent word in the API is searched', async () => {
-  render(<App />);
-  const user = userEvent.setup();
-
-  const searchInput = screen.getByRole('textbox');
-  await user.type(searchInput, 'kaffe{Enter}');
-
-  // Wait for the error message to appear
-  const errorMessage = await screen.findByText(/Word not found/i);
-  expect(errorMessage).toBeInTheDocument();
-});
-
-test('should display synonyms and antonyms for a word', async () => {
-  render(<App />);
-  const user = userEvent.setup();
-
-  // Search for 'ephemeral'
-  const searchInput = screen.getByRole('textbox');
-  await user.type(searchInput, 'ephemeral');
-  const searchButton = screen.getByRole('button', { name: /search/i });
-  await user.click(searchButton);
-
-  // Wait for the synonyms section to be displayed
-  const synonymsSection = await screen.findByText(/Synonyms: ephemeron/i);
-  expect(synonymsSection).toBeInTheDocument();
-
-  // Wait for the antonyms section to be displayed
-  const antonymsSection = await screen.findByText(
-    /Antonyms: eternal, everlasting, permanent/i
-  );
-  expect(antonymsSection).toBeInTheDocument();
-});
-
-describe('Audio elements', async () => {
-  test('should render audio elements when available and verify that their source is correct', async () => {
+describe('Audio elements', () => {
+  test('should render audio elements for words when available and verify that their source is correct', async () => {
     render(<App />);
     const user = userEvent.setup();
 
@@ -277,8 +332,8 @@ describe('Audio elements', async () => {
   });
 });
 
-describe('Favorites', async () => {
-  test('should be able to add a word as a favorite and see it in the favorites list', async () => {
+describe('Add word as a favorite', () => {
+  test('should be able to add a word as a favorite and view it in the favorite list', async () => {
     render(<App />);
     const user = userEvent.setup();
 
@@ -300,17 +355,19 @@ describe('Favorites', async () => {
     });
     await user.click(addToFavoritesButton);
 
-    // Click on the "Favorites" button to view the favorites list
+    // Click on the "Favorites" button to view the favorite list
     const viewFavoritesButton = screen.getByRole('button', {
       name: /favorites/i,
     });
     await user.click(viewFavoritesButton);
 
-    // Check if the favorited word 'ephemeral' is in the favorites list
+    // Check if the favorited word 'ephemeral' is in the favorite list
     expect(screen.getByText('ephemeral')).toBeInTheDocument();
   });
+});
 
-  test('should be able to remove a word from the favorites list', async () => {
+describe('Remove word from favorites', () => {
+  test('should be able to remove a word from the favorite list', async () => {
     render(<App />);
     const user = userEvent.setup();
 
@@ -350,7 +407,44 @@ describe('Favorites', async () => {
   });
 });
 
-describe('Light and dark mode', async () => {
+describe('View saved word details in favorite list', () => {
+  test('should expand word details for a specific word in favorite list when "See More" is clicked', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    const searchInput = screen.getByRole('textbox');
+    const searchButton = screen.getByRole('button', { name: /search/i });
+    await user.type(searchInput, 'ephemeral');
+    await user.click(searchButton);
+
+    await waitFor(() =>
+      expect(screen.getByText('ephemeral')).toBeInTheDocument()
+    );
+
+    const addToFavoritesButton = screen.getByRole('button', {
+      name: /add to favorites/i,
+    });
+    await user.click(addToFavoritesButton);
+
+    const viewFavoritesButton = screen.getByRole('button', {
+      name: /favorites/i,
+    });
+    await user.click(viewFavoritesButton);
+
+    const seeMoreButton = within(
+      screen.getByText('ephemeral').closest('li')
+    ).getByRole('button', { name: /see more/i });
+    await user.click(seeMoreButton);
+
+    // Verify that the additional details are showing
+    const definition = await screen.findByText(
+      'Something which lasts for a short period of time.'
+    );
+    expect(definition).toBeInTheDocument();
+  });
+});
+
+describe('Light and dark mode', () => {
   test('should be able to switch from light to dark mode', async () => {
     render(<App />);
     const user = userEvent.setup();
