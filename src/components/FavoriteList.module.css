@@ -1,14 +1,9 @@
 .favorite-list-container {
-  max-width: 50%;
-}
-
-.favorite-list-word-container {
   display: flex;
-  align-items: center;
-  gap: 2rem;
+  flex-direction: column;
 }
-
-.favorite-remove-button {
+.favorite-list-remove-button,
+.favorite-list-expand-button {
   border-radius: 99em;
   box-sizing: border-box;
   font-family: 'Space Grotesk', sans-serif;
@@ -20,15 +15,22 @@
   width: 6rem;
   height: 3rem;
   transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .favorite-list-item {
   padding: 1rem;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   gap: 1rem;
-  max-width: 30%;
+  max-width: 60%;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-weight: 500;
+  border-bottom: 0.05rem solid var(--color-dark);
 }
 
 .favorite-list-synonyms,
