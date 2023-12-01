@@ -23,13 +23,17 @@
 .favorite-list-item {
   padding: 1rem;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr auto auto;
   align-items: center;
   gap: 1rem;
-  max-width: 60%;
+  max-width: 35%;
   font-size: 1.5rem;
   line-height: 1.5;
   font-weight: 500;
+}
+
+.favorite-details {
+  max-width: 60%;
 }
 
 .favorite-list-synonyms,
