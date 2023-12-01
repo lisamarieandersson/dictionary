@@ -28,6 +28,6 @@ npm test
 
 <br>
 
-### Links
+## Links
 
 Free Dictionary [API Documentation](https://dictionaryapi.dev/)
