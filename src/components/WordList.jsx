@@ -9,7 +9,7 @@ function WordList({ wordData, onToggleFavorite, isFavorite }) {
           className={styles['word-list-favorite-button']}
           onClick={() => onToggleFavorite(wordData.word)}
         >
-          {isFavorite(wordData.word) ? 'Unfavorite' : 'Favorite'}
+          {isFavorite(wordData.word) ? 'Unfavorite' : 'Add To Favorites'}
         </button>
       </div>
       <ul>
