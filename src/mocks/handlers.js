@@ -14,7 +14,7 @@ export const handlers = [
         return res(ctx.json([mockData])); // Return the mock data for the requested word
       }
 
-      // Fallback if the the word isn't found in the mock data, simulate a 404 response
+      // If the the word isn't found in the mock data, simulate a 404 response
       return res(ctx.status(404), ctx.json({ message: 'Word not found' }));
     }
   ),
