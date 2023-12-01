@@ -333,7 +333,7 @@ describe('Audio elements', () => {
 });
 
 describe('Add word as a favorite', () => {
-  test('should be able to add a word as a favorite and view it in the favorite list', async () => {
+  test('should be able to add a word as a favorite', async () => {
     render(<App />);
     const user = userEvent.setup();
 
@@ -408,7 +408,7 @@ describe('Remove word from favorites', () => {
 });
 
 describe('View saved word details in favorite list', () => {
-  test('should expand word details for a specific word in favorite list when "See More" is clicked', async () => {
+  test('should expand word details for a specific word in favorite list when "See More" button is clicked', async () => {
     render(<App />);
     const user = userEvent.setup();
 
