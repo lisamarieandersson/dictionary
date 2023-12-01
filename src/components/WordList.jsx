@@ -34,17 +34,17 @@ function WordList({ wordData, onToggleFavorite, isFavorite }) {
               <li key={idx}>
                 {definition.definition}
                 {definition.synonyms && definition.synonyms.length > 0 && (
-                  <p className={styles['synonyms']}>
+                  <p className={styles['word-list-synonyms']}>
                     Synonyms: {definition.synonyms.slice(0, 3).join(', ')}
                   </p>
                 )}
                 {definition.antonyms && definition.antonyms.length > 0 && (
-                  <p className={styles['antonyms']}>
+                  <p className={styles['word-list-antonyms']}>
                     Antonyms: {definition.antonyms.slice(0, 3).join(', ')}
                   </p>
                 )}
                 {definition.example && (
-                  <p className={styles['example']}>
+                  <p className={styles['word-list-example']}>
                     Example: {definition.example}
                   </p>
                 )}
