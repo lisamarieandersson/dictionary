@@ -1,4 +1,4 @@
-# Test assignment with Vitest 🌻
+# Test assignment with Vitest and React Testing Library 🌻
 
 ## Introduction
 
@@ -14,7 +14,7 @@ Install the local dependencies by simply running:
 npm install
 ```
 
-Run the project (opens automatically in the browser):
+Run the project:
 
 ```sh
 npm run dev
