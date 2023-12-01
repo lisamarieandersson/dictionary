@@ -1,3 +1,5 @@
+/* ----- Styling for App ----- */
+
 /* ----- Default light theme styles ----- */
 
 .App {
@@ -11,7 +13,7 @@
   margin: 0;
 }
 
-/* ----- Dark Theme Styles ----- */
+/* ----- Dark theme styles ----- */
 
 .App[data-theme='dark'] {
   background-color: var(--color-background-dark);
@@ -61,7 +63,7 @@
   padding-top: 0.5rem;
 }
 
-/* ----- Styling ThemeToggle for light and dark mode (has to be global) ----- */
+/* ----- Styling ThemeToggle for light and dark mode has to be global to work ----- */
 
 .theme-toggle-container {
   display: flex;
@@ -143,13 +145,13 @@
   ); /* This sets the knob color in dark mode */
 }
 
-/* For the light theme styling */
-.App[data-theme='light'] .toggle-switch {
-  border-color: var(--color-dark); /* Keep border color for light theme */
+/* Default light theme style for the line */
+.App-line {
+  border-top: 1.2px solid var(--color-dark);
+  margin-bottom: 3rem;
 }
 
-.App[data-theme='light'] .toggle-switch-label:before {
-  background-color: var(
-    --color-dark
-  ); /* This sets the knob color in light mode */
+/* Dark theme style for the line */
+.App[data-theme='dark'] .App-line {
+  border-top: 1.2px solid var(--color-light);
 }
