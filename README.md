@@ -26,7 +26,8 @@ Start and run the test environment:
 npm test
 ```
 
+<br>
+
 ### Links
 
-<br>
 Free Dictionary [API Documentation](https://dictionaryapi.dev/)
