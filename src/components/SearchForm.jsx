@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import styles from './SearchForm.module.css';
 
-function SearchForm({ onSearch }) {
-  const [query, setQuery] = useState('');
+function SearchForm({ onSearch, query, setQuery }) {
   const [error, setError] = useState('');
 
   const handleInputChange = (event) => {
