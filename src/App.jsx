@@ -9,6 +9,7 @@ import useFavorites from './hooks/useFavorites';
 function App() {
   const [theme, setTheme] = useState('light');
   const [wordData, setWordData] = useState(null);
+  const [query, setQuery] = useState('');
   const [error, setError] = useState(null);
   const { favorites, addFavorite, removeFavorite, isFavorite } = useFavorites();
   const [showFavorites, setShowFavorites] = useState(false);
@@ -23,7 +24,12 @@ function App() {
   };
 
   // Toggle between search and favorites view
-  const toggleView = () => setShowFavorites(!showFavorites);
+  const toggleView = () => {
+    if (showFavorites) {
+      setError(null); // Clear error when switching back to search view
+    }
+    setShowFavorites(!showFavorites);
+  };
 
   // Update the theme on the App component
   useEffect(() => {
@@ -36,13 +42,13 @@ function App() {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
-  const handleSearch = async (query) => {
+  const handleSearch = async (NewQuery) => {
     try {
       const response = await fetch(
-        `https://api.dictionaryapi.dev/api/v2/entries/en/${query}`
+        `https://api.dictionaryapi.dev/api/v2/entries/en/${NewQuery}`
       );
       if (!response.ok) {
-        throw new Error('Word not found'); // This message will be shown to the user
+        throw new Error('Word not found. Please try again.'); // This message will be shown to the user
       }
       const data = await response.json();
       setWordData(data[0]); // Storing the first result
@@ -52,6 +58,7 @@ function App() {
       setWordData(null); // Resetting the state in case of an error
       setError(error.message); // Set the error message
     }
+    setQuery(''); // Clear the query after the search
   };
 
   return (
@@ -61,12 +68,15 @@ function App() {
         toggleTheme={toggleTheme}
         toggleView={toggleView}
         showFavorites={showFavorites}
-        data-theme={theme}
       />
-      <div className={`line ${theme}`}></div>{' '}
-      {/* This div represents the line */}
-      {!showFavorites && <SearchForm onSearch={handleSearch} />}
-      {error && <div className="error-message">{error}</div>}
+      <div className={`App-line ${theme}`}></div>{' '}
+      {!showFavorites && (
+        <SearchForm onSearch={handleSearch} query={query} setQuery={setQuery} />
+      )}
+      {/* Render error message only when not showing favorites and there is an error */}
+      {!showFavorites && error && (
+        <div className="App-error-message">{error}</div>
+      )}
       {!showFavorites && wordData && (
         <WordList
           wordData={wordData}
