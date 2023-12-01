@@ -49,81 +49,148 @@ test('should clear the search input after search with enter', async () => {
   const searchInput = screen.getByRole('textbox');
   await user.type(searchInput, 'coffee{Enter}');
 
-  // Alternatively, if the clearing happens synchronously, you could directly assert
   expect(searchInput).toHaveValue('');
 });
 
-test('should display new word after submission via click', async () => {
+test('should display the searched word via click', async () => {
   render(<App />);
   const user = userEvent.setup();
-
   const searchInput = screen.getByRole('textbox');
   await user.type(searchInput, 'coffee');
 
   const searchButton = screen.getByRole('button', { name: /search/i });
   await user.click(searchButton);
 
-  // Check if the word 'coffee' is in the document
   expect(screen.getByText('coffee')).toBeInTheDocument();
+});
 
-  // Check for phonetics
+test('should display phonetics of the word via click', async () => {
+  render(<App />);
+  const user = userEvent.setup();
+  const searchInput = screen.getByRole('textbox');
+  await user.type(searchInput, 'coffee');
+
+  const searchButton = screen.getByRole('button', { name: /search/i });
+  await user.click(searchButton);
+
   expect(screen.getByText(/ˈkɑ.fi/i)).toBeInTheDocument();
+});
 
-  // Check for the example in the definitions
+test('should display example in definitions via click', async () => {
+  render(<App />);
+  const user = userEvent.setup();
+  const searchInput = screen.getByRole('textbox');
+  await user.type(searchInput, 'coffee');
+
+  const searchButton = screen.getByRole('button', { name: /search/i });
+  await user.click(searchButton);
+
   expect(
     screen.getByText('Example: He did not stay for coffee.')
   ).toBeInTheDocument();
+});
 
-  // Check for noun definitions
+test('should display noun definitions via click', async () => {
+  render(<App />);
+  const user = userEvent.setup();
+  const searchInput = screen.getByRole('textbox');
+  await user.type(searchInput, 'coffee');
+
+  const searchButton = screen.getByRole('button', { name: /search/i });
+  await user.click(searchButton);
+
   expect(screen.getByText('noun')).toBeInTheDocument();
   expect(
     screen.getByText(
       'A beverage made by infusing the beans of the coffee plant in hot water.'
     )
   ).toBeInTheDocument();
+});
 
-  // Check for verb definitions (if applicable)
+test('should display verb definitions via click', async () => {
+  render(<App />);
+  const user = userEvent.setup();
+  const searchInput = screen.getByRole('textbox');
+  await user.type(searchInput, 'coffee');
+
+  const searchButton = screen.getByRole('button', { name: /search/i });
+  await user.click(searchButton);
+
   expect(screen.getByText('verb')).toBeInTheDocument();
   expect(screen.getByText('To drink coffee.')).toBeInTheDocument();
+});
 
-  // Check for adjective definitions (if applicable)
+test('should display adjective definitions via click', async () => {
+  render(<App />);
+  const user = userEvent.setup();
+  const searchInput = screen.getByRole('textbox');
+  await user.type(searchInput, 'coffee');
+
+  const searchButton = screen.getByRole('button', { name: /search/i });
+  await user.click(searchButton);
+
   expect(screen.getByText('adjective')).toBeInTheDocument();
   expect(
     screen.getByText('Of a pale brown colour, like that of milk coffee.')
   ).toBeInTheDocument();
 });
 
-test('should display new word after submission via enter', async () => {
+test('should display the searched word via enter', async () => {
+  render(<App />);
+  const user = userEvent.setup();
+  const searchInput = screen.getByRole('textbox');
+  await user.type(searchInput, 'coffee{Enter}');
+  expect(screen.getByText('coffee')).toBeInTheDocument();
+});
+
+test('should display phonetics of the searched word via enter', async () => {
+  render(<App />);
+  const user = userEvent.setup();
+  const searchInput = screen.getByRole('textbox');
+  await user.type(searchInput, 'coffee{Enter}');
+  expect(screen.getByText(/ˈkɑ.fi/i)).toBeInTheDocument();
+});
+
+test('should display example in definitions via enter', async () => {
+  render(<App />);
+  const user = userEvent.setup();
+  const searchInput = screen.getByRole('textbox');
+  await user.type(searchInput, 'coffee{Enter}');
+  expect(
+    screen.getByText('Example: He did not stay for coffee.')
+  ).toBeInTheDocument();
+});
+
+test('should display noun definitions via enter', async () => {
   render(<App />);
   const user = userEvent.setup();
 
   const searchInput = screen.getByRole('textbox');
   await user.type(searchInput, 'coffee{Enter}');
-
-  // Check if the word 'coffee' is in the document
-  expect(screen.getByText('coffee')).toBeInTheDocument();
-
-  // Check for phonetics
-  expect(screen.getByText(/ˈkɑ.fi/i)).toBeInTheDocument();
-
-  // Check for the example in the definitions
-  expect(
-    screen.getByText('Example: He did not stay for coffee.')
-  ).toBeInTheDocument();
-
-  // Check for noun definitions
   expect(screen.getByText('noun')).toBeInTheDocument();
   expect(
     screen.getByText(
       'A beverage made by infusing the beans of the coffee plant in hot water.'
     )
   ).toBeInTheDocument();
+});
 
-  // Check for verb definitions (if applicable)
+test('should display verb definitions via enter', async () => {
+  render(<App />);
+  const user = userEvent.setup();
+
+  const searchInput = screen.getByRole('textbox');
+  await user.type(searchInput, 'coffee{Enter}');
   expect(screen.getByText('verb')).toBeInTheDocument();
   expect(screen.getByText('To drink coffee.')).toBeInTheDocument();
+});
 
-  // Similarly, check for adjective definitions (if applicable)
+test('should display adjective definitions via enter', async () => {
+  render(<App />);
+  const user = userEvent.setup();
+
+  const searchInput = screen.getByRole('textbox');
+  await user.type(searchInput, 'coffee{Enter}');
   expect(screen.getByText('adjective')).toBeInTheDocument();
   expect(
     screen.getByText('Of a pale brown colour, like that of milk coffee.')
