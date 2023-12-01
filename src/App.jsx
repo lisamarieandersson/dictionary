@@ -19,7 +19,7 @@ function App() {
     if (isFavorite(word)) {
       removeFavorite(word);
     } else {
-      addFavorite(word);
+      addFavorite(wordData);
     }
   };
 
