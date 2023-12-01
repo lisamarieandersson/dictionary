@@ -69,7 +69,7 @@ function App() {
         toggleView={toggleView}
         showFavorites={showFavorites}
       />
-      <div className={`App-line ${theme}`}></div>{' '}
+      <div className="App-line"></div>
       {!showFavorites && (
         <SearchForm onSearch={handleSearch} query={query} setQuery={setQuery} />
       )}
