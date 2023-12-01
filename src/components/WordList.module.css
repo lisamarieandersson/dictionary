@@ -19,9 +19,12 @@
   border: none;
   padding: 0.8rem 1rem;
   cursor: pointer;
-  width: 6rem;
-  height: 3.187rem;
+  max-width: 8rem;
+  height: 3rem;
   transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .synonyms,
