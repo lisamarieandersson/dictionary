@@ -48,22 +48,15 @@
   outline: solid 1.6px var(--color-light);
 }
 
-.App-line.light {
-  border-top: 1.2px solid var(--color-dark);
-  margin-bottom: 3rem;
-}
-
-.App-line.dark {
-  border-top: 1.2px solid var(--color-light);
-  margin-bottom: 3rem;
-}
+/* ----- Error message styling ----- */
 
 .App-error-message {
   text-align: center;
   padding-top: 0.5rem;
 }
 
-/* ----- Styling ThemeToggle for light and dark mode has to be global to work ----- */
+/* ----- Styling ThemeToggle component for light and dark mode ----- */
+/* ----- Styling for this component has to be in this file to work! -----*/
 
 .theme-toggle-container {
   display: flex;
@@ -144,6 +137,8 @@
     --color-light
   ); /* This sets the knob color in dark mode */
 }
+
+/* ----- Line styling ----- */
 
 /* Default light theme style for the line */
 .App-line {
