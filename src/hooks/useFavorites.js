@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+//useFavorites hook - manages the word data in the favorite list
+
 function useFavorites() {
   const [favorites, setFavorites] = useState(() => {
     const savedFavorites = sessionStorage.getItem('favorites');
