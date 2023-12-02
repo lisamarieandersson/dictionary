@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styles from './FavoriteList.module.css';
 
+// Renders and mananages the list of favorite words, with and word data
+
 function FavoriteList({ favorites, removeFavorite }) {
   // State object to track the expanded status of each item
   const [expandedStates, setExpandedStates] = useState({});
