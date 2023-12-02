@@ -1,5 +1,8 @@
 import styles from './WordList.module.css';
 
+// Renders detailed information about a word, including its phonetics,
+// meanings, definitions, synonyms, antonyms, and examples.
+
 function WordList({ wordData, onToggleFavorite, isFavorite }) {
   return (
     <div className={styles['word-list-container']}>
