@@ -1,4 +1,5 @@
-// Styling for this component needs to be global and is therefore located in App.css
+// Styling for this component needs to be "global" to work, and is therefore located in App.css
+// ThemeToggle is a simple UI element designed to switch between light and dark theme
 
 function ThemeToggle({ theme, toggleTheme }) {
   return (
