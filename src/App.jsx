@@ -15,6 +15,7 @@ function App() {
   const [showFavorites, setShowFavorites] = useState(false);
   const appRef = useRef(null);
 
+  // Adds a word to favorites (if it's not already favorited), or removes it if it is
   const toggleFavorite = (word) => {
     if (isFavorite(word)) {
       removeFavorite(word);
@@ -42,6 +43,7 @@ function App() {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
+  // Handles fetching word data from dictionary API
   const handleSearch = async (NewQuery) => {
     try {
       const response = await fetch(
