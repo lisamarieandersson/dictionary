@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './Header.module.css';
 import ThemeToggle from './ThemeToggle';
 
+// Renders header with a heading, ThemeToggle and Favorites/Back To Search button
+
 function Header({ theme, toggleTheme, toggleView, showFavorites }) {
   return (
     <header className={styles['header-container']}>
