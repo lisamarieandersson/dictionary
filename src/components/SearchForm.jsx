@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import styles from './SearchForm.module.css';
 
+// Renders a form with text input field and button where users can type their search query
+// Includes input validation and error handling
+// The input's value is controlled by the query state, which is passed as a prop and
+// updated via the setQuery function.
+
 function SearchForm({ onSearch, query, setQuery }) {
   const [error, setError] = useState('');
 
