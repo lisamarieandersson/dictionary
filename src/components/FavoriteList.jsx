@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styles from './FavoriteList.module.css';
 
-// Renders and mananages the list of favorite words, with and word data
+// Renders and mananages the list of favorite words, with word data
 // Each favorite word can be expanded or collapsed to show or hide its details
+// A word can also be removed from the favorite list
 
 function FavoriteList({ favorites, removeFavorite }) {
   // State object to track the expanded status of each item
