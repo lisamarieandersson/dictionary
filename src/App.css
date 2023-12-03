@@ -51,8 +51,11 @@
 /* ----- Error message styling ----- */
 
 .App-error-message {
+  position: absolute;
+  top: 17rem;
+  right: 8.2rem;
+  width: 100%;
   text-align: center;
-  padding-top: 0.5rem;
 }
 
 /* ----- Styling ThemeToggle component for light and dark mode ----- */
