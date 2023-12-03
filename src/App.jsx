@@ -32,6 +32,11 @@ function App() {
     setShowFavorites(!showFavorites);
   };
 
+  // Resets error
+  const resetError = () => {
+    setError(null);
+  };
+
   // Update the theme on the App component
   useEffect(() => {
     if (appRef.current) {
@@ -45,6 +50,7 @@ function App() {
 
   // Handles fetching word data from dictionary API
   const handleSearch = async (NewQuery) => {
+    setError(null); // Clear any existing errors before starting a new search
     try {
       const response = await fetch(
         `https://api.dictionaryapi.dev/api/v2/entries/en/${NewQuery}`
@@ -54,7 +60,6 @@ function App() {
       }
       const data = await response.json();
       setWordData(data[0]); // Storing the first result
-      setError(null); // Clear any existing errors on successful fetch
     } catch (error) {
       console.error('Error fetching data:', error);
       setWordData(null); // Resetting the state in case of an error
@@ -73,7 +78,12 @@ function App() {
       />
       <div className="App-line"></div>
       {!showFavorites && (
-        <SearchForm onSearch={handleSearch} query={query} setQuery={setQuery} />
+        <SearchForm
+          onSearch={handleSearch}
+          query={query}
+          setQuery={setQuery}
+          resetError={resetError}
+        />
       )}
       {!showFavorites && error && (
         <div className="App-error-message">{error}</div>

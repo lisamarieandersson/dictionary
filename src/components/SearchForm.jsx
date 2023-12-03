@@ -6,7 +6,7 @@ import styles from './SearchForm.module.css';
 // The input's value is controlled by the query state, which is passed as a prop and
 // updated via the setQuery function.
 
-function SearchForm({ onSearch, query, setQuery }) {
+function SearchForm({ onSearch, query, setQuery, resetError }) {
   const [error, setError] = useState('');
 
   const handleInputChange = (event) => {
@@ -16,6 +16,7 @@ function SearchForm({ onSearch, query, setQuery }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    resetError(); // Reset error state in App component
     if (!query.trim()) {
       setError('Please enter a word to search.'); // Sets error if input is empty
     } else {
