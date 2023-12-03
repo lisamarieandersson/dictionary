@@ -29,7 +29,7 @@
 }
 
 .App[data-theme='light'] button:hover {
-  background-color: var(--color-light);
+  background-color: var(--color-light-blue);
   color: var(--color-dark);
   outline: solid 0.1rem var(--color-dark);
 }
@@ -56,7 +56,7 @@
 }
 
 /* ----- Styling ThemeToggle component for light and dark mode ----- */
-/* ----- Styling for this component has to be in this file to work! -----*/
+/* ----- Styling for this component has to be in this file to be able to work! -----*/
 
 .theme-toggle-container {
   display: flex;
