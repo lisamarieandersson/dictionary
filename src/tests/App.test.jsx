@@ -258,6 +258,21 @@ describe('Word definition: Synonyms', () => {
     );
     expect(synonymsSection).toBeInTheDocument();
   });
+
+  test('should display synonyms of the searched word via enter', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    // Search for 'ephemeral'
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'ephemeral{Enter}');
+
+    // Wait for the synonyms section to be displayed
+    const synonymsSection = await screen.findByText(
+      /Synonyms: evanescent, fleeting, momentary/i
+    );
+    expect(synonymsSection).toBeInTheDocument();
+  });
 });
 
 describe('Word definition: Antonyms', () => {
@@ -270,6 +285,21 @@ describe('Word definition: Antonyms', () => {
     await user.type(searchInput, 'ephemeral');
     const searchButton = screen.getByRole('button', { name: /search/i });
     await user.click(searchButton);
+
+    // Wait for the antonyms section to be displayed
+    const antonymsSection = await screen.findByText(
+      /Antonyms: eternal, everlasting, permanent/i
+    );
+    expect(antonymsSection).toBeInTheDocument();
+  });
+
+  test('should display antonyms of the searched word via enter', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    // Search for 'ephemeral'
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'ephemeral{Enter}');
 
     // Wait for the antonyms section to be displayed
     const antonymsSection = await screen.findByText(
