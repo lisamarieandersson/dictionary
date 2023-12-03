@@ -52,6 +52,7 @@
 /* ----- Error message styling ----- */
 
 .App-error-message {
+  color: var(--text-color-error);
   position: absolute;
   top: 17rem;
   right: 8.2rem;
