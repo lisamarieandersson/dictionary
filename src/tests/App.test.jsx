@@ -321,14 +321,14 @@ describe('Audio elements', () => {
     await waitFor(() => {
       const audioElements = screen.getAllByLabelText('word pronunciation');
       expect(audioElements.length).toBeGreaterThan(0);
-
-      // Verify the source of the first audio element
-      const firstAudioElement = audioElements[0];
-      expect(firstAudioElement).toHaveAttribute('src');
-      expect(firstAudioElement.src).toContain(
-        'https://api.dictionaryapi.dev/media/pronunciations/en/coffee-uk.mp3'
-      );
     });
+
+    // Now that we know the audio elements are present, check their attributes
+    const firstAudioElement = screen.getAllByLabelText('word pronunciation')[0];
+    expect(firstAudioElement).toHaveAttribute('src');
+    expect(firstAudioElement.src).toContain(
+      'https://api.dictionaryapi.dev/media/pronunciations/en/coffee-uk.mp3'
+    );
   });
 });
 
