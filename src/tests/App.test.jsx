@@ -61,7 +61,8 @@ describe('Search for a word', () => {
     const searchButton = screen.getByRole('button', { name: /search/i });
     await user.click(searchButton);
 
-    expect(screen.getByText('coffee')).toBeInTheDocument();
+    const displayedWord = await screen.findByText('coffee');
+    expect(displayedWord).toBeInTheDocument();
   });
 
   test('should display the searched word via enter', async () => {
@@ -71,7 +72,8 @@ describe('Search for a word', () => {
     const searchInput = screen.getByRole('textbox');
     await user.type(searchInput, 'coffee{Enter}');
 
-    expect(screen.getByText('coffee')).toBeInTheDocument();
+    const displayedWord = await screen.findByText('coffee');
+    expect(displayedWord).toBeInTheDocument();
   });
 });
 
@@ -86,7 +88,8 @@ describe('Word definition: Phonetics', () => {
     const searchButton = screen.getByRole('button', { name: /search/i });
     await user.click(searchButton);
 
-    expect(screen.getByText('Phonetic: /ˈkɑ.fi/')).toBeInTheDocument();
+    const phoneticsText = await screen.findByText('Phonetic: /ˈkɑ.fi/');
+    expect(phoneticsText).toBeInTheDocument();
   });
 
   test('should display phonetics of the searched word via enter', async () => {
@@ -94,36 +97,9 @@ describe('Word definition: Phonetics', () => {
     const user = userEvent.setup();
     const searchInput = screen.getByRole('textbox');
     await user.type(searchInput, 'coffee{Enter}');
-    expect(screen.getByText('Phonetic: /ˈkɑ.fi/')).toBeInTheDocument();
-  });
-});
 
-describe('Word definition: Example', () => {
-  test('should display "example" in definitions of the searched word via click', async () => {
-    render(<App />);
-    const user = userEvent.setup();
-
-    const searchInput = screen.getByRole('textbox');
-    await user.type(searchInput, 'coffee');
-
-    const searchButton = screen.getByRole('button', { name: /search/i });
-    await user.click(searchButton);
-
-    expect(
-      screen.getByText('Example: He did not stay for coffee.')
-    ).toBeInTheDocument();
-  });
-
-  test('should display "example" in definitions of the searched word via enter', async () => {
-    render(<App />);
-    const user = userEvent.setup();
-
-    const searchInput = screen.getByRole('textbox');
-    await user.type(searchInput, 'coffee{Enter}');
-
-    expect(
-      screen.getByText('Example: He did not stay for coffee.')
-    ).toBeInTheDocument();
+    const phoneticsText = await screen.findByText('Phonetic: /ˈkɑ.fi/');
+    expect(phoneticsText).toBeInTheDocument();
   });
 });
 
@@ -138,12 +114,13 @@ describe('Word definition: Noun', () => {
     const searchButton = screen.getByRole('button', { name: /search/i });
     await user.click(searchButton);
 
-    expect(screen.getByText('noun')).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        'A beverage made by infusing the beans of the coffee plant in hot water.'
-      )
-    ).toBeInTheDocument();
+    const nounText = await screen.findByText('noun');
+    expect(nounText).toBeInTheDocument();
+
+    const definitionText = await screen.findByText(
+      'A beverage made by infusing the beans of the coffee plant in hot water.'
+    );
+    expect(definitionText).toBeInTheDocument();
   });
 
   test('should display noun definitions of the searched word via enter', async () => {
@@ -153,12 +130,13 @@ describe('Word definition: Noun', () => {
     const searchInput = screen.getByRole('textbox');
     await user.type(searchInput, 'coffee{Enter}');
 
-    expect(screen.getByText('noun')).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        'A beverage made by infusing the beans of the coffee plant in hot water.'
-      )
-    ).toBeInTheDocument();
+    const nounText = await screen.findByText('noun');
+    expect(nounText).toBeInTheDocument();
+
+    const definitionText = await screen.findByText(
+      'A beverage made by infusing the beans of the coffee plant in hot water.'
+    );
+    expect(definitionText).toBeInTheDocument();
   });
 });
 
@@ -173,8 +151,11 @@ describe('Word definition: Verb', () => {
     const searchButton = screen.getByRole('button', { name: /search/i });
     await user.click(searchButton);
 
-    expect(screen.getByText('verb')).toBeInTheDocument();
-    expect(screen.getByText('To drink coffee.')).toBeInTheDocument();
+    const verbText = await screen.findByText('verb');
+    expect(verbText).toBeInTheDocument();
+
+    const definitionText = await screen.findByText('To drink coffee.');
+    expect(definitionText).toBeInTheDocument();
   });
 
   test('should display verb definitions of the searched word via enter', async () => {
@@ -184,8 +165,11 @@ describe('Word definition: Verb', () => {
     const searchInput = screen.getByRole('textbox');
     await user.type(searchInput, 'coffee{Enter}');
 
-    expect(screen.getByText('verb')).toBeInTheDocument();
-    expect(screen.getByText('To drink coffee.')).toBeInTheDocument();
+    const verbText = await screen.findByText('verb');
+    expect(verbText).toBeInTheDocument();
+
+    const definitionText = await screen.findByText('To drink coffee.');
+    expect(definitionText).toBeInTheDocument();
   });
 });
 
@@ -200,10 +184,13 @@ describe('Word definition: Adjective', () => {
     const searchButton = screen.getByRole('button', { name: /search/i });
     await user.click(searchButton);
 
-    expect(screen.getByText('adjective')).toBeInTheDocument();
-    expect(
-      screen.getByText('Of a pale brown colour, like that of milk coffee.')
-    ).toBeInTheDocument();
+    const adjectiveText = await screen.findByText('adjective');
+    expect(adjectiveText).toBeInTheDocument();
+
+    const definitionText = await screen.findByText(
+      'Of a pale brown colour, like that of milk coffee.'
+    );
+    expect(definitionText).toBeInTheDocument();
   });
 
   test('should display adjective definitions of the searched word via enter', async () => {
@@ -213,10 +200,13 @@ describe('Word definition: Adjective', () => {
     const searchInput = screen.getByRole('textbox');
     await user.type(searchInput, 'coffee{Enter}');
 
-    expect(screen.getByText('adjective')).toBeInTheDocument();
-    expect(
-      screen.getByText('Of a pale brown colour, like that of milk coffee.')
-    ).toBeInTheDocument();
+    const adjectiveText = await screen.findByText('adjective');
+    expect(adjectiveText).toBeInTheDocument();
+
+    const definitionText = await screen.findByText(
+      'Of a pale brown colour, like that of milk coffee.'
+    );
+    expect(definitionText).toBeInTheDocument();
   });
 });
 
@@ -253,6 +243,37 @@ describe('Word definition: Antonym', () => {
       /Antonyms: eternal, everlasting, permanent/i
     );
     expect(antonymsSection).toBeInTheDocument();
+  });
+});
+
+describe('Word definition: Example', () => {
+  test('should display "example" in definitions of the searched word via click', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'coffee');
+
+    const searchButton = screen.getByRole('button', { name: /search/i });
+    await user.click(searchButton);
+
+    const exampleText = await screen.findByText(
+      'Example: He did not stay for coffee.'
+    );
+    expect(exampleText).toBeInTheDocument();
+  });
+
+  test('should display "example" in definitions of the searched word via enter', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'coffee{Enter}');
+
+    const exampleText = await screen.findByText(
+      'Example: He did not stay for coffee.'
+    );
+    expect(exampleText).toBeInTheDocument();
   });
 });
 
@@ -313,20 +334,14 @@ describe('Audio elements', () => {
     render(<App />);
     const user = userEvent.setup();
 
-    // Trigger the search
     const searchInput = screen.getByRole('textbox');
     await user.type(searchInput, 'coffee{Enter}');
 
-    // Wait for the audio elements to appear in the DOM
-    await waitFor(() => {
-      const audioElements = screen.getAllByLabelText('word pronunciation');
-      expect(audioElements.length).toBeGreaterThan(0);
-    });
+    const audioElements = await screen.findAllByLabelText('word pronunciation');
+    expect(audioElements.length).toBeGreaterThan(0);
 
-    // Now that we know the audio elements are present, check their attributes
-    const firstAudioElement = screen.getAllByLabelText('word pronunciation')[0];
-    expect(firstAudioElement).toHaveAttribute('src');
-    expect(firstAudioElement.src).toContain(
+    expect(audioElements[0]).toHaveAttribute('src');
+    expect(audioElements[0].src).toContain(
       'https://api.dictionaryapi.dev/media/pronunciations/en/coffee-uk.mp3'
     );
   });
@@ -362,7 +377,8 @@ describe('Add word as a favorite', () => {
     await user.click(viewFavoritesButton);
 
     // Check if the favorited word 'ephemeral' is in the favorite list
-    expect(screen.getByText('ephemeral')).toBeInTheDocument();
+    const favoriteWord = await screen.findByText('ephemeral');
+    expect(favoriteWord).toBeInTheDocument();
   });
 });
 
