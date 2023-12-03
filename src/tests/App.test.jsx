@@ -210,42 +210,6 @@ describe('Word definition: Adjective', () => {
   });
 });
 
-describe('Word definition: Synonym', () => {
-  test('should display synonyms of the searched word via click', async () => {
-    render(<App />);
-    const user = userEvent.setup();
-
-    // Search for 'ephemeral'
-    const searchInput = screen.getByRole('textbox');
-    await user.type(searchInput, 'ephemeral');
-    const searchButton = screen.getByRole('button', { name: /search/i });
-    await user.click(searchButton);
-
-    // Wait for the synonyms section to be displayed
-    const synonymsSection = await screen.findByText(/Synonyms: ephemeron/i);
-    expect(synonymsSection).toBeInTheDocument();
-  });
-});
-
-describe('Word definition: Antonym', () => {
-  test('should display antonyms of the searched word via click', async () => {
-    render(<App />);
-    const user = userEvent.setup();
-
-    // Search for 'ephemeral'
-    const searchInput = screen.getByRole('textbox');
-    await user.type(searchInput, 'ephemeral');
-    const searchButton = screen.getByRole('button', { name: /search/i });
-    await user.click(searchButton);
-
-    // Wait for the antonyms section to be displayed
-    const antonymsSection = await screen.findByText(
-      /Antonyms: eternal, everlasting, permanent/i
-    );
-    expect(antonymsSection).toBeInTheDocument();
-  });
-});
-
 describe('Word definition: Example', () => {
   test('should display "example" in definitions of the searched word via click', async () => {
     render(<App />);
@@ -274,6 +238,44 @@ describe('Word definition: Example', () => {
       'Example: He did not stay for coffee.'
     );
     expect(exampleText).toBeInTheDocument();
+  });
+});
+
+describe('Word definition: Synonyms', () => {
+  test('should display synonyms of the searched word via click', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    // Search for 'ephemeral'
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'ephemeral');
+    const searchButton = screen.getByRole('button', { name: /search/i });
+    await user.click(searchButton);
+
+    // Wait for the synonyms section to be displayed
+    const synonymsSection = await screen.findByText(
+      /Synonyms: evanescent, fleeting, momentary/i
+    );
+    expect(synonymsSection).toBeInTheDocument();
+  });
+});
+
+describe('Word definition: Antonyms', () => {
+  test('should display antonyms of the searched word via click', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    // Search for 'ephemeral'
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'ephemeral');
+    const searchButton = screen.getByRole('button', { name: /search/i });
+    await user.click(searchButton);
+
+    // Wait for the antonyms section to be displayed
+    const antonymsSection = await screen.findByText(
+      /Antonyms: eternal, everlasting, permanent/i
+    );
+    expect(antonymsSection).toBeInTheDocument();
   });
 });
 
@@ -379,6 +381,42 @@ describe('Add word as a favorite', () => {
     // Check if the favorited word 'ephemeral' is in the favorite list
     const favoriteWord = await screen.findByText('ephemeral');
     expect(favoriteWord).toBeInTheDocument();
+  });
+});
+
+describe('Unfavorite a word', () => {
+  test('should be able to unfavorite a word', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    // Search for a word and add it to favorites
+    const searchInput = screen.getByRole('textbox');
+    await user.type(searchInput, 'ephemeral{Enter}');
+
+    await waitFor(() =>
+      expect(screen.getByText('ephemeral')).toBeInTheDocument()
+    );
+
+    const addToFavoritesButton = screen.getByRole('button', {
+      name: /add to favorites/i,
+    });
+    await user.click(addToFavoritesButton);
+
+    // Check that the button text changes to "Unfavorite"
+    expect(
+      screen.getByRole('button', { name: /unfavorite/i })
+    ).toBeInTheDocument();
+
+    // Click the "Unfavorite" button
+    const unfavoriteButton = screen.getByRole('button', {
+      name: /unfavorite/i,
+    });
+    await user.click(unfavoriteButton);
+
+    // Verify that the button changes back to "Add to Favorites"
+    expect(
+      screen.getByRole('button', { name: /add to favorites/i })
+    ).toBeInTheDocument();
   });
 });
 
