@@ -14,6 +14,13 @@ beforeEach(() => {
   sessionStorage.clear();
 });
 
+describe('Header', () => {
+  test('should render the correct headline in header', () => {
+    render(<App />);
+    expect(screen.getByText('Dictionary')).toBeInTheDocument();
+  });
+});
+
 describe('Search form', () => {
   test('should allow user to type in the search input', async () => {
     render(<App />);
