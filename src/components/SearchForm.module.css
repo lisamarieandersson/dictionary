@@ -26,6 +26,7 @@
 }
 
 .search-error-message {
+  color: var(--text-color-error);
   position: absolute;
   top: 3.8rem;
   right: 4.5rem;
